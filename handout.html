@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Student Handout · Portfolio Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="redbar"></div>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="index.html"><img src="assets/elevate-logo-dark.png" alt="Illinois Tech Elevate"> Portfolio Development</a>
+  <nav><a href="index.html">Home</a><a href="slides.html">Slides</a><a class="active" href="handout.html">Handout</a><a href="poll.html">Poll</a><a href="qa.html">Q&amp;A</a><a href="resources.html">Resources</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow">Student worksheet</div>
+  <h1>Build one case study today</h1>
+  <p class="lead">Everything you type saves on this device. When you're done, download it, email it to Career Services, or print it. Nothing is sent anywhere until you choose to send it.</p>
+  <p class="noprint"><button class="btn" onclick="exportText()">Download my worksheet</button> <button class="btn ghost" onclick="emailIt()">Email it to Career Services</button> <button class="btn ghost" onclick="window.print()">Print</button> <button class="btn ghost small" onclick="clearAll()">Clear</button></p>
+</div></section>
+
+<div id="embedForm" class="wrap" style="display:none"></div>
+
+<section class="section"><div class="wrap grid c2">
+  <div class="card">
+    <span class="pill">Step 0</span><h2>About you</h2>
+    <label>Name</label><input type="text" data-store="h_name" placeholder="First and last name">
+    <label>Major and year</label><input type="text" data-store="h_major" placeholder="e.g., Computer Science, 3rd year">
+    <label>Illinois Tech email</label><input type="text" data-store="h_email" placeholder="you@hawk.illinoistech.edu">
+  </div>
+  <div class="card">
+    <span class="pill">Step 1 · 60 seconds</span><h2>The audit</h2>
+    <p>Search your name plus "Illinois Tech." What came up first?</p>
+    <label>What a recruiter sees today</label><textarea data-store="h_audit" placeholder="Nothing / an old account / something I made / someone else with my name…"></textarea>
+    <label>Before you build, research three portfolios in your field. Note what they have in common.</label><textarea data-store="h_research" placeholder="Common sections, visuals, tone, length…"></textarea>
+  </div>
+</div></section>
+
+<section class="section alt"><div class="wrap grid c2">
+  <div class="card">
+    <span class="pill">Step 2 · 2 minutes</span><h2>Your brand in two sentences</h2>
+    <label>Sentence 1: who you are and what you do (major, focus, strongest skill)</label><input type="text" data-store="about1" placeholder="I'm a…">
+    <label>Sentence 2: the value you bring and what drives you</label><input type="text" data-store="about2" placeholder="I build… because…">
+    <div class="preview" id="aboutPreview" style="margin-top:12px">Your About Me will appear here.</div>
+  </div>
+  <div class="card">
+    <span class="pill">Step 3 · 8 minutes</span><h2>One CAR case study</h2>
+    <label>Project title</label><input type="text" data-store="car_title" placeholder="e.g., Club website rebuild">
+    <label>Challenge: the problem, constraint, or stakes</label><textarea data-store="car_c"></textarea>
+    <label>Action: what you did, tools, decisions, hours</label><textarea data-store="car_a"></textarea>
+    <label>Result: the outcome with a number (even estimated)</label><textarea data-store="car_r" placeholder="Cut load time 40%… placed 2nd of 31… saved $1,200…"></textarea>
+    <label>Tools and skills used</label><input type="text" data-store="car_tools">
+    <label>Visual proof you'll show (screenshot, photo, chart, model, repo link)</label><input type="text" data-store="car_visual">
+    <label>Partner's question your case study didn't answer (your revision plan)</label><input type="text" data-store="car_q">
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap grid c2">
+  <div class="card">
+    <span class="pill">Step 4</span><h2>Choose your platform</h2>
+    <label>Platform I'm committing to</label>
+    <select data-store="h_platform"><option value="">Choose…</option><option>GitHub Pages</option><option>Behance</option><option>Notion</option><option>WordPress</option><option>Wix or Squarespace</option><option>Canva site</option><option>Other</option></select>
+    <label>Why it fits my field</label><textarea data-store="h_why"></textarea>
+    <label>3–6 projects I'll shortlist (class, Elevate, work, personal)</label><textarea data-store="h_projects" placeholder="1.&#10;2.&#10;3."></textarea>
+    <p class="hint">Short on projects? Every <a href="https://elevate.iit.edu/experiences/">Elevate experience</a> (research, internships and co-ops, competitions, short courses, <a href="https://www.iit.edu/elevate/virtual-internships">virtual internships</a>, <a href="https://elevate.iit.edu/channels/aws-cloud-certifications/">AWS certification projects</a>) is a case study waiting to be written. See <a href="resources.html">Resources</a> for real portfolios by college.</p>
+  </div>
+  <div class="card">
+    <span class="pill">Step 5</span><h2>Before you leave, take it with you</h2>
+    <p class="hint" style="margin:0 0 10px">Everything above is saved on this device only. Use the buttons at the top to <b>download</b> it as a text file, <b>email</b> it to yourself or to Freddrick, or <b>print</b> it. Then:</p>
+    <div class="check"><input type="checkbox" data-store="c1" id="k1"><label for="k1">Two-sentence About Me drafted</label></div>
+    <div class="check"><input type="checkbox" data-store="c2" id="k2"><label for="k2">One complete CAR case study with a visual identified</label></div>
+    <div class="check"><input type="checkbox" data-store="c3" id="k3"><label for="k3">Platform chosen, researched against my field</label></div>
+    <div class="check"><input type="checkbox" data-store="c4" id="k4"><label for="k4">3–6 projects shortlisted</label></div>
+    <div class="check"><input type="checkbox" data-store="c5" id="k5"><label for="k5">Site skeleton: Home · About · Case Studies · Skills · Contact</label></div>
+    <div class="check"><input type="checkbox" data-store="c6" id="k6"><label for="k6">Portfolio review booked</label></div>
+    <p style="margin-top:14px"><a class="btn" id="bookBtn" href="#">Book a portfolio review</a> <a class="btn ghost" id="checkinBtn" href="#">Check in on 312</a></p>
+    <p class="hint">On <a href="https://elevate.iit.edu/">elevate.iit.edu</a>: <a href="https://elevate.iit.edu/blog/2026/08/18/394225/">AI Career Coach</a> · <a href="https://elevate.iit.edu/channels/create-a-resume-cover-letter/">résumé and cover letter</a> · <a href="https://elevate.iit.edu/channels/find-an-internship-co-op/">internships and co-ops</a> · <a href="https://elevate.iit.edu/channels/free-industry-certifications/">free certifications</a> · <a href="https://elevate.iit.edu/career-coaches/">career coaches</a>.</p>
+  </div>
+</div></section>
+
+<footer class="footer"><div class="wrap">
+  <div>Career Services and Experiential Learning · Illinois Institute of Technology · MTCC Room 106 · 312.567.6800 · <a href="https://elevate.iit.edu">elevate.iit.edu</a></div>
+  <div>© 2026 Freddrick Logan, PhD · <a href="https://fredlogan.phd">fredlogan.phd</a></div>
+</div></footer>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script>
+const C = window.PW_CONFIG;
+function sheet(){
+  const g=k=>PW.get(k,'');
+  return `ELEVATE PORTFOLIO DEVELOPMENT WORKSHOP · ${C.eventDate}
+Name: ${g('h_name')}   Major/Year: ${g('h_major')}   Email: ${g('h_email')}
+
+AUDIT: ${g('h_audit')}
+RESEARCH NOTES: ${g('h_research')}
+
+ABOUT ME:
+${g('about1')} ${g('about2')}
+
+CASE STUDY: ${g('car_title')}
+Challenge: ${g('car_c')}
+Action: ${g('car_a')}
+Result: ${g('car_r')}
+Tools: ${g('car_tools')}
+Visual proof: ${g('car_visual')}
+Revision question: ${g('car_q')}
+
+PLATFORM: ${g('h_platform')} — ${g('h_why')}
+PROJECT SHORTLIST:
+${g('h_projects')}
+
+CHECKLIST: ${['c1','c2','c3','c4','c5','c6'].map((k,i)=>(PW.get(k,false)?'[x]':'[ ]')+' '+(i+1)).join('  ')}`;
+}
+function exportText(){ PW.download('Elevate-Portfolio-Worksheet.txt', sheet()); }
+function emailIt(){ location.href='mailto:'+C.staffEmail+'?subject='+encodeURIComponent('Portfolio Workshop worksheet: '+PW.get('h_name',''))+'&body='+encodeURIComponent(sheet()); }
+function clearAll(){ if(confirm('Clear everything you typed on this device?')){ localStorage.removeItem('elevate-portfolio-workshop'); location.reload(); } }
+function aboutPrev(){ const a=PW.get('about1',''),b=PW.get('about2',''); document.getElementById('aboutPreview').textContent=(a||b)?(a+' '+b).trim():'Your About Me will appear here.'; }
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('bookBtn').href=C.bookingUrl; document.getElementById('checkinBtn').href=C.checkinUrl;
+  document.querySelectorAll('[data-store^="about"]').forEach(el=>el.addEventListener('input',aboutPrev)); aboutPrev();
+  document.querySelectorAll('.check input').forEach(cb=>{ const f=()=>cb.closest('.check').classList.toggle('done',cb.checked); cb.addEventListener('change',f); f(); });
+  if(C.formEmbedUrl){ const d=document.getElementById('embedForm'); d.style.display='block'; d.innerHTML='<div class="card"><h2>Submit your worksheet</h2><iframe src="'+C.formEmbedUrl+'" style="width:100%;height:900px;border:0" allowfullscreen></iframe></div>'; }
+});
+</script>
+</body>
+</html>

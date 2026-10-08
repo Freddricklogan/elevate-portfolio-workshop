@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Q&amp;A · Portfolio Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="redbar"></div>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="index.html"><img src="assets/elevate-logo-dark.png" alt="Illinois Tech Elevate"> Portfolio Development</a>
+  <nav><a href="index.html">Home</a><a href="slides.html">Slides</a><a href="handout.html">Handout</a><a href="poll.html">Poll</a><a class="active" href="qa.html">Q&amp;A</a><a href="resources.html">Resources</a></nav>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="eyebrow reveal">Questions and feedback</div>
+  <h1 class="reveal">Ask while I'm talking.</h1>
+  <p class="lead reveal">Type a question any time, no name needed. I read them as they come in and answer live or follow up by email. The same form takes your feedback at the end.</p>
+</div></section>
+
+<section class="section"><div class="wrap grid c2">
+  <div class="card accent" style="text-align:center">
+    <img src="assets/qa-qr.png" alt="QR code for the question form" style="width:min(260px,70vw);border-radius:10px;background:#fff;padding:8px">
+    <p><a class="btn" id="qaBtn" href="#" target="_blank" rel="noopener">Ask a question →</a></p>
+    <p class="hint">Opens Microsoft Forms. No sign-in. <span id="qaShort"></span></p>
+  </div>
+  <div class="card">
+    <h3>Prefer email?</h3>
+    <textarea id="qtext" placeholder="Example: How many projects do I need before I share my portfolio with an employer?"></textarea>
+    <p style="margin-top:12px"><button class="btn ghost small" onclick="sendQ()">Email it to Freddrick</button> <button class="btn ghost small" onclick="copyQ()">Copy</button></p>
+    <p class="hint">Or raise your hand. That still works.</p>
+  </div>
+</div></section>
+
+<div id="embedQA" class="wrap" style="display:none"></div>
+
+<section class="section alt"><div class="wrap grid c2">
+  <div class="card takeaway">
+    <h3>Take today with you</h3>
+    <p>Your <a href="handout.html">handout</a> saves on your device; download it, email it to yourself, or print it before you go. Then <a id="bookLink" href="#">book a 30-minute portfolio review</a> to get feedback on what you built.</p>
+  </div>
+  <div class="card">
+    <h3>While you wait</h3>
+    <ul>
+      <li>Start your About Me on the <a href="handout.html">handout</a>.</li>
+      <li>See real portfolios from your college on the <a href="resources.html">resources</a> page.</li>
+      <li>Check in on 312 for Elevate credit: <a id="checkinLink" href="#">tap here</a>.</li>
+    </ul>
+  </div>
+</div></section>
+
+<footer class="footer"><div class="wrap">
+  <div>Career Services and Experiential Learning · Illinois Institute of Technology · MTCC Room 106 · 312.567.6800 · <a href="https://elevate.iit.edu">elevate.iit.edu</a></div>
+  <div>© 2026 Freddrick Logan, PhD · <a href="https://fredlogan.phd">fredlogan.phd</a></div>
+</div></footer>
+<script src="assets/config.js"></script>
+<script src="assets/site.js"></script>
+<script>
+const C=window.PW_CONFIG||{};
+function sendQ(){ const q=document.getElementById('qtext').value.trim(); if(!q){PW.toast('Type a question first');return;}
+  location.href='mailto:'+C.staffEmail+'?subject='+encodeURIComponent('Portfolio Workshop question')+'&body='+encodeURIComponent(q); }
+function copyQ(){ PW.copy(document.getElementById('qtext').value); }
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('qaBtn').href=C.qaUrl; document.getElementById('qaShort').textContent=C.qaUrl.replace('https://','');
+  document.getElementById('bookLink').href=C.bookingUrl; document.getElementById('checkinLink').href=C.checkinUrl;
+  if(C.qaEmbedUrl){ const d=document.getElementById('embedQA'); d.style.display='block'; d.innerHTML='<div class="card"><iframe src="'+C.qaEmbedUrl+'" style="width:100%;height:640px;border:0" allowfullscreen></iframe></div>'; }
+});
+</script>
+</body>
+</html>
