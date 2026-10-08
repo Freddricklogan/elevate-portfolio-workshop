@@ -70,6 +70,16 @@
   .seq .step{display:flex;gap:16px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
   .seq .step:last-child{border-bottom:0}
   .seq .n{font-family:var(--serif);font-size:clamp(28px,3vw,44px);color:var(--accent);line-height:1;min-width:1.2em}
+  .cs{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-columns:1.15fr .85fr}
+  .cs .body{padding:18px 20px}
+  .cs .ttl{font-family:var(--serif);font-weight:600;font-size:clamp(18px,1.9vw,26px);color:var(--ink);margin:0 0 10px;line-height:1.15}
+  .cs .f{display:grid;grid-template-columns:86px 1fr;gap:6px 10px;font-size:clamp(13px,1.15vw,16px);line-height:1.35;margin:0 0 6px}
+  .cs .f b{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);padding-top:3px}
+  .cs .f .num{background:var(--accent-soft);color:var(--accent);font-weight:700;padding:0 5px;border-radius:5px}
+  .cs .visual{background:var(--surface-2);border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;gap:8px}
+  .cs .visual svg{width:100%;height:auto;max-height:150px}
+  .cs .visual small{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+  @media (max-width:760px){.cs{grid-template-columns:1fr}.cs .visual{border-left:0;border-top:1px solid var(--line)}}
   .pages{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
   .pages span{padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-weight:600;color:var(--ink);opacity:0;animation:rise .5s var(--ease) forwards}
   .pages span:nth-child(1){animation-delay:.2s}.pages span:nth-child(2){animation-delay:.5s}.pages span:nth-child(3){animation-delay:.8s}.pages span:nth-child(4){animation-delay:1.1s}.pages span:nth-child(5){animation-delay:1.4s}
@@ -276,16 +286,22 @@
 <!-- 11 Activity -->
 <section class="slide">
   <div class="eyebrow reveal">0:33 · Build</div>
-  <h2 class="reveal">One case study. Eight minutes. Right now.</h2>
+  <h2 class="reveal" style="max-width:none;font-size:clamp(28px,3.8vw,52px)">One case study. Eight minutes. Right now.</h2>
   <div class="cols two">
-    <div class="box reveal">
-      <p><b>8:00</b> on the handout: Title · Challenge · Action · Result with a number · Tools · Visual proof.</p>
-      <p><b>3:00</b> swap with a neighbor. They ask the one question your case study doesn't answer. That question is your revision plan.</p>
-      <p class="quiet">Handout: the <b>Handout</b> page on this site, or the QR on the last slide.</p>
+    <div class="reveal">
+      <div class="tabs" id="csTabs" style="margin-bottom:10px"></div>
+      <div class="cs" id="csCard"></div>
+      <p class="quiet" style="margin-top:10px">A finished case study looks like this: six short fields and one picture. Real ones from your college are on the <b>Resources</b> page → <i>See what good looks like</i>.</p>
     </div>
-    <div class="box reveal" style="text-align:center;display:flex;flex-direction:column;justify-content:center"><p class="timer" id="t8">8:00</p><p><button class="btn" onclick="startTimer(480,'t8')">Start 8:00</button> <button class="btn ghost small" onclick="startTimer(180,'t8')">3:00 swap</button></p></div>
+    <div class="reveal">
+      <div class="box" style="text-align:center;margin-bottom:14px"><p class="timer" id="t8" style="margin:0 0 8px">8:00</p><p style="margin:0"><button class="btn" onclick="startTimer(480,'t8')">Start 8:00</button> <button class="btn ghost small" onclick="startTimer(180,'t8')">3:00 swap</button></p></div>
+      <div class="seq">
+        <div class="step"><div class="n" style="font-size:22px;min-width:3.2em">8:00</div><div>Fill the six fields on the <b>Handout</b> page for one project of yours. Result must have a number, even an estimate.</div></div>
+        <div class="step"><div class="n" style="font-size:22px;min-width:3.2em">3:00</div><div>Swap phones with a neighbor. They ask the one question your case study doesn't answer. That question is your revision plan.</div></div>
+      </div>
+    </div>
   </div>
-  <p class="lead reveal" style="margin-top:14px">That is 20% of a portfolio. The other 80% is repetition, not inspiration.</p>
+  <p class="lead reveal" style="margin-top:8px;font-size:clamp(17px,1.8vw,24px)">That is 20% of a portfolio. The other 80% is repetition, not inspiration.</p>
 </section>
 
 <!-- 12 Checklist -->
@@ -391,6 +407,23 @@ let timers={};
 function startTimer(sec,id){ clearInterval(timers[id]); const el=document.getElementById(id); let t=sec;
   const f=()=>{ el.textContent= sec>99 ? Math.floor(t/60)+':'+String(t%60).padStart(2,'0') : String(t); if(t<=0){clearInterval(timers[id]); el.textContent= sec>99?'0:00':'0'; PW.toast('Time');} t--; };
   f(); timers[id]=setInterval(f,1000); }
+const CS=[
+ {tab:"Software",title:"Club website rebuild",c:"Site crashed every event night; 300 weekly users, no owner.",a:"Rebuilt the backend as a REST API over 3 weeks; moved hosting; wrote the runbook.",r:["Page loads down ","40%",", zero outages since launch"],tools:"Node, PostgreSQL, GitHub Actions",proof:"Before/after load-time chart and the repo link",art:"chart"},
+ {tab:"Engineering",title:"Drone power budget redesign",c:"Senior design drone flew 9 minutes; spec required 11.",a:"Re-ran the power budget, redesigned the distribution board, bench-tested three revisions.",r:["Flight time up ","22%",", spec met on the first field test"],tools:"Altium, MATLAB, oscilloscope",proof:"Board photo plus the test-flight data table",art:"board"},
+ {tab:"Business",title:"Case competition: retail turnaround",c:"Regional chain losing 8% revenue a year; 48 hours to a board-ready plan.",a:"Built a 5-year DCF, sized three pivots, pitched to a judge panel.",r:["","2nd of 31 teams",", model adopted as the class example"],tools:"Excel, PowerPoint, Tableau",proof:"One slide from the deck and the sensitivity table",art:"deck"},
+ {tab:"Architecture",title:"Affordable infill housing studio",c:"Narrow lot, strict daylight code, 12-week studio brief.",a:"Parametric daylight study across 40 massing options; detailed the best two.",r:["Selected for the ","end-of-year exhibition",", 1 of 6 from 38 projects"],tools:"Rhino, Grasshopper, Revit",proof:"Section drawing and the daylight heat map",art:"plan"}
+];
+const CSART={
+ chart:'<svg viewBox="0 0 220 140"><rect x="0" y="0" width="220" height="140" rx="10" fill="var(--surface)"/><polyline points="20,110 60,95 100,100 140,60 180,70 205,30" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/><line x1="20" y1="120" x2="205" y2="120" stroke="var(--line)" stroke-width="2"/></svg>',
+ board:'<svg viewBox="0 0 220 140"><rect x="10" y="15" width="200" height="110" rx="10" fill="var(--surface)" stroke="var(--line)"/><rect x="30" y="35" width="60" height="40" rx="6" fill="var(--accent)"/><rect x="105" y="35" width="40" height="18" rx="4" fill="var(--line)"/><rect x="155" y="35" width="35" height="18" rx="4" fill="var(--line)"/><rect x="105" y="62" width="85" height="12" rx="4" fill="var(--line)"/><rect x="30" y="90" width="160" height="12" rx="4" fill="var(--line)"/></svg>',
+ deck:'<svg viewBox="0 0 220 140"><rect x="10" y="15" width="200" height="110" rx="8" fill="var(--surface)" stroke="var(--line)"/><rect x="25" y="30" width="110" height="12" rx="4" fill="var(--ink)" opacity=".7"/><rect x="25" y="55" width="40" height="55" fill="var(--line)"/><rect x="75" y="40" width="40" height="70" fill="var(--accent)"/><rect x="125" y="65" width="40" height="45" fill="var(--line)"/><rect x="175" y="50" width="20" height="60" fill="var(--line)"/></svg>',
+ plan:'<svg viewBox="0 0 220 140"><rect x="10" y="15" width="200" height="110" rx="8" fill="var(--surface)" stroke="var(--line)"/><rect x="30" y="30" width="80" height="80" fill="none" stroke="var(--ink)" stroke-width="3"/><rect x="30" y="30" width="40" height="40" fill="var(--accent)" opacity=".85"/><rect x="70" y="70" width="40" height="40" fill="var(--accent)" opacity=".35"/><line x1="130" y1="40" x2="190" y2="40" stroke="var(--line)" stroke-width="8"/><line x1="130" y1="60" x2="180" y2="60" stroke="var(--line)" stroke-width="8"/><line x1="130" y1="80" x2="190" y2="80" stroke="var(--line)" stroke-width="8"/><line x1="130" y1="100" x2="170" y2="100" stroke="var(--line)" stroke-width="8"/></svg>'};
+function csShow(k){ const d=CS[k]; document.querySelectorAll('#csTabs button').forEach((b,n)=>b.classList.toggle('on',n===k));
+  document.getElementById('csCard').innerHTML='<div class="body"><p class="ttl">'+d.title+'</p>'+
+   '<div class="f"><b>Challenge</b><span>'+d.c+'</span></div><div class="f"><b>Action</b><span>'+d.a+'</span></div>'+
+   '<div class="f"><b>Result</b><span>'+d.r[0]+'<span class="num">'+d.r[1]+'</span>'+d.r[2]+'</span></div>'+
+   '<div class="f"><b>Tools</b><span>'+d.tools+'</span></div><div class="f"><b>Proof</b><span>'+d.proof+'</span></div></div>'+
+   '<div class="visual">'+CSART[d.art]+'<small>Visual proof</small></div>'; }
 const BP={
  home:["Home","Who you are in one line, one strong visual, and a way in. A recruiter decides here whether to click."],
  about:["About","Your two sentences, expanded, with a real photo. The person behind the work, in under a minute of reading."],
@@ -412,6 +445,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('[data-store^="about"]').forEach(el=>el.addEventListener('input',aboutPrev)); aboutPrev();
   document.getElementById('bookLink').href=(window.PW_CONFIG||{}).bookingUrl||'#';
   document.querySelectorAll('#bpTabs span').forEach(t=>t.onclick=()=>bpShow(t.dataset.p,true));
+  const ct=document.getElementById('csTabs'); CS.forEach((d,k)=>{const b=document.createElement('button'); b.textContent=d.tab; b.onclick=()=>csShow(k); ct.appendChild(b);}); csShow(0);
   const h=parseInt((location.hash||'').replace('#s',''))||1; show(h-1);
   let x0=null; document.addEventListener('touchstart',e=>x0=e.touches[0].clientX); document.addEventListener('touchend',e=>{ if(x0===null)return; const dx=e.changedTouches[0].clientX-x0; if(Math.abs(dx)>60)go(dx<0?1:-1); x0=null; });
 });
