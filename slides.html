@@ -96,6 +96,7 @@
   .slide input[type=text],.slide textarea{font-size:18px}
   .on .reveal{animation-play-state:running}
   @media (max-width:760px){.slide{padding:4vh 5vw 70px;overflow:auto;justify-content:flex-start}.cols.two,.vs{grid-template-columns:1fr}.vs .mid{text-align:center}.hud{font-size:12px}}
+  .slide .cols .box:has(.stat){display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 22px}.slide .cols .box .stat small{font-size:clamp(18px,1.8vw,26px);color:var(--ink);margin:14px auto 0;max-width:24ch;line-height:1.3}.slide.ink .cols .box .stat small{color:#E8E5DD}.slide.accent .cols .box .stat small{color:#FFD2D2}
   @media (prefers-reduced-motion: reduce){.draw,.typing,.pages span,.bgart .orb,.slide.on{animation:none;opacity:1;stroke-dashoffset:0;width:auto}}
 </style>
 </head>
@@ -145,9 +146,9 @@
   <div class="eyebrow reveal">The next 45 minutes</div>
   <h2 class="reveal">One idea, one project, one page.</h2>
   <div class="cols">
-    <div class="box reveal"><p class="stat" style="font-size:clamp(40px,5vw,72px)">1<small>idea: show, don't tell</small></p></div>
-    <div class="box reveal"><p class="stat" style="font-size:clamp(40px,5vw,72px)">1<small>project from your life, turned into a case study today</small></p></div>
-    <div class="box reveal"><p class="stat" style="font-size:clamp(40px,5vw,72px)">1<small>page published this week</small></p></div>
+    <div class="box reveal"><p class="stat" style="font-size:clamp(60px,7.5vw,120px)">1<small>Hold one idea: show, don't tell</small></p></div>
+    <div class="box reveal"><p class="stat" style="font-size:clamp(60px,7.5vw,120px)">1<small>Turn one project from your life into a case study today</small></p></div>
+    <div class="box reveal"><p class="stat" style="font-size:clamp(60px,7.5vw,120px)">1<small>Publish one page this week</small></p></div>
   </div>
   <p class="lead reveal" style="margin-top:22px">Bring one project to mind now: a class, a job, a club, a thing you built because you wanted to.</p>
 </section>
@@ -191,7 +192,7 @@
       <input type="text" data-store="about1" placeholder="I'm a third-year mechanical engineering student focused on…">
       <label>The value you bring and what drives you</label>
       <input type="text" data-store="about2" placeholder="I build… because…">
-      <p class="quiet">Two minutes of silence. A volunteer reads theirs; we type it here.</p>
+      <p class="quiet">Write in silence for two minutes. Then one volunteer reads theirs aloud and we type it here.</p>
     </div>
     <div class="box reveal"><p class="quiet" style="margin:0 0 8px">Live preview</p><div class="preview" id="aboutPreview" style="font-size:clamp(18px,2vw,26px);font-family:var(--serif)">Your About Me will appear here.</div><p><button class="btn small" onclick="PW.copy(document.getElementById('aboutPreview').textContent)">Copy</button></p></div>
   </div>
@@ -275,9 +276,9 @@
   <div class="eyebrow reveal">You have more than you think</div>
   <h2 class="reveal">Your evidence already exists. It just isn't published.</h2>
   <div class="cols">
-    <div class="box reveal"><p class="stat" style="font-size:clamp(36px,4.6vw,64px)">Class<small>studio work, labs, senior design, case competitions, IPRO</small></p></div>
-    <div class="box reveal"><p class="stat" style="font-size:clamp(36px,4.6vw,64px)">Elevate<small>Forage job simulations, hackathons, AWS certification projects</small></p></div>
-    <div class="box reveal"><p class="stat" style="font-size:clamp(36px,4.6vw,64px)">Life<small>part-time jobs, freelance, side projects, club leadership</small></p></div>
+    <div class="box reveal"><p class="stat" style="font-size:clamp(44px,5.2vw,80px)">Class<small>Pull from studio work, labs, senior design, case competitions, IPRO</small></p></div>
+    <div class="box reveal"><p class="stat" style="font-size:clamp(44px,5.2vw,80px)">Elevate<small>Write up your Forage simulations, hackathons, and AWS certification projects</small></p></div>
+    <div class="box reveal"><p class="stat" style="font-size:clamp(44px,5.2vw,80px)">Life<small>Count part-time jobs, freelance work, side projects, club leadership</small></p></div>
   </div>
   <div class="ask reveal" style="margin-top:18px">Ask the room</div>
   <p class="lead reveal">Name one thing you made this semester that nobody outside the class has seen.</p>
@@ -310,12 +311,12 @@
   <h2 class="reveal">What leaves the room with you.</h2>
   <div class="cols two">
     <div class="box reveal">
-      <div class="check"><input type="checkbox" data-store="c1" id="c1"><label for="c1">Two-sentence About Me drafted</label></div>
-      <div class="check"><input type="checkbox" data-store="c2" id="c2"><label for="c2">One CAR case study with a visual identified</label></div>
-      <div class="check"><input type="checkbox" data-store="c3" id="c3"><label for="c3">Platform chosen for your field</label></div>
-      <div class="check"><input type="checkbox" data-store="c4" id="c4"><label for="c4">3–6 projects shortlisted</label></div>
-      <div class="check"><input type="checkbox" data-store="c5" id="c5"><label for="c5">Site skeleton: Home · About · Case Studies · Skills · Contact</label></div>
-      <div class="check"><input type="checkbox" data-store="c6" id="c6"><label for="c6">Portfolio review booked</label></div>
+      <div class="check"><input type="checkbox" data-store="c1" id="c1"><label for="c1">Draft your two-sentence About Me</label></div>
+      <div class="check"><input type="checkbox" data-store="c2" id="c2"><label for="c2">Write one CAR case study and pick its visual</label></div>
+      <div class="check"><input type="checkbox" data-store="c3" id="c3"><label for="c3">Choose a platform for your field</label></div>
+      <div class="check"><input type="checkbox" data-store="c4" id="c4"><label for="c4">Shortlist 3–6 projects</label></div>
+      <div class="check"><input type="checkbox" data-store="c5" id="c5"><label for="c5">Set up the five pages: Home · About · Case Studies · Skills · Contact</label></div>
+      <div class="check"><input type="checkbox" data-store="c6" id="c6"><label for="c6">Book a portfolio review</label></div>
     </div>
     <div class="box reveal"><p class="quiet" style="margin:0 0 6px">Keep going</p><p>Book a portfolio review: <a id="bookLink" href="#">30 minutes with Career Services</a></p><p><a href="https://elevate.iit.edu">elevate.iit.edu</a> · <a href="https://elevate.iit.edu/channels/create-a-resume-cover-letter/">Résumé and cover letter</a> · <a href="https://elevate.iit.edu/channels/aws-cloud-certifications/">AWS certifications</a></p></div>
   </div>
