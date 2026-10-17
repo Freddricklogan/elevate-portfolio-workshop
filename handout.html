@@ -18,6 +18,7 @@
 <section class="hero"><div class="wrap">
   <div class="eyebrow">Student worksheet</div>
   <h1>Build one case study today</h1>
+  <p class="hint" style="margin:-2px 0 10px" data-session="long"></p>
   <p class="lead">Everything you type saves on this device. When you're done, download it, email it to Career Services, or print it. Nothing is sent anywhere until you choose to send it.</p>
   <p class="noprint"><button class="btn" onclick="exportText()">Download my worksheet</button> <button class="btn ghost" onclick="emailIt()">Email it to Career Services</button> <button class="btn ghost" onclick="window.print()">Print</button> <button class="btn ghost small" onclick="clearAll()">Clear</button></p>
 </div></section>
@@ -42,16 +43,26 @@
 <section class="section alt"><div class="wrap grid c2">
   <div class="card">
     <span class="pill">Step 2 · 2 minutes</span><h2>Your brand in two sentences</h2>
+    <div class="formula"><span class="fx">Formula</span>I'm a <span class="b">year + major</span> who <span class="b">what you build or do</span>. I <span class="b">value you bring</span> because <span class="b">what drives you</span>.<span class="eg">e.g. I'm a third-year mechanical engineering student who builds test rigs. I turn messy data into decisions because I like being the person the team trusts with the numbers.</span></div>
     <label>Sentence 1: who you are and what you do (major, focus, strongest skill)</label><input type="text" data-store="about1" placeholder="I'm a…">
+    <button class="fill" data-target="about1" data-text="I'm a [year + major] who [what you build or do].">Start from the formula</button>
     <label>Sentence 2: the value you bring and what drives you</label><input type="text" data-store="about2" placeholder="I build… because…">
-    <div class="preview" id="aboutPreview" style="margin-top:12px">Your About Me will appear here.</div>
+    <button class="fill" data-target="about2" data-text="I [value you bring] because [what drives you].">Start from the formula</button>
+    <p class="hint" style="margin:12px 0 4px">Live preview <span class="wc" id="wcAbout"></span></p>
+    <div class="preview" id="aboutPreview">Your About Me will appear here.</div>
   </div>
   <div class="card">
     <span class="pill">Step 3 · 8 minutes</span><h2>One CAR case study</h2>
+    <div class="formula"><span class="fx">Formula</span>Challenge: <span class="b">problem + stakes</span>. Action: <span class="b">what you did, tools, hours</span>. Result: <span class="b">a number</span>.<span class="eg">e.g. Challenge: the club site crashed every event night; 300 weekly users. Action: rebuilt the backend as a REST API over 3 weeks. Result: page loads down 40%, zero outages since.</span></div>
     <label>Project title</label><input type="text" data-store="car_title" placeholder="e.g., Club website rebuild">
     <label>Challenge: the problem, constraint, or stakes</label><textarea data-store="car_c"></textarea>
+    <button class="fill" data-target="car_c" data-text="[The problem] for [who it affected]; the stakes were [what would happen if it stayed broken].">Start from the formula</button>
     <label>Action: what you did, tools, decisions, hours</label><textarea data-store="car_a"></textarea>
+    <button class="fill" data-target="car_a" data-text="I [what you did] using [tools] over [hours or weeks]; the key decision was [decision].">Start from the formula</button>
     <label>Result: the outcome with a number (even estimated)</label><textarea data-store="car_r" placeholder="Cut load time 40%… placed 2nd of 31… saved $1,200…"></textarea>
+    <button class="fill" data-target="car_r" data-text="[Metric] went from [before] to [after]; [a second number or who adopted it].">Start from the formula</button>
+    <p class="hint" style="margin:12px 0 4px">Live preview <span class="wc" id="wcCar"></span></p>
+    <div class="preview" id="carPreview">Fill Challenge, Action, and Result to see your case study.</div>
     <label>Tools and skills used</label><input type="text" data-store="car_tools">
     <label>Visual proof you'll show (screenshot, photo, chart, model, repo link)</label><input type="text" data-store="car_visual">
     <label>Partner's question your case study didn't answer (your revision plan)</label><input type="text" data-store="car_q">
@@ -76,14 +87,14 @@
     <div class="check"><input type="checkbox" data-store="c4" id="k4"><label for="k4">Shortlist 3–6 projects</label></div>
     <div class="check"><input type="checkbox" data-store="c5" id="k5"><label for="k5">Set up the five pages: Home · About · Case Studies · Skills · Contact</label></div>
     <div class="check"><input type="checkbox" data-store="c6" id="k6"><label for="k6">Book a portfolio review</label></div>
-    <p style="margin-top:14px"><a class="btn" id="bookBtn" href="#">Book a portfolio review</a> <a class="btn ghost" id="checkinBtn" href="#">Check in on 312</a></p>
+    <p style="margin-top:14px"><a class="btn" id="bookBtn" href="#">Book a portfolio review</a> <span data-checkin="btn"><a class="btn ghost" id="checkinBtn" href="#">Check in on 312</a></span></p>
     <p class="hint">On <a href="https://elevate.iit.edu/">elevate.iit.edu</a>: <a href="https://elevate.iit.edu/blog/2026/08/18/394225/">AI Career Coach</a> · <a href="https://elevate.iit.edu/channels/create-a-resume-cover-letter/">résumé and cover letter</a> · <a href="https://elevate.iit.edu/channels/find-an-internship-co-op/">internships and co-ops</a> · <a href="https://elevate.iit.edu/channels/free-industry-certifications/">free certifications</a> · <a href="https://elevate.iit.edu/career-coaches/">career coaches</a>.</p>
   </div>
 </div></section>
 
 <footer class="footer"><div class="wrap">
   <div>Career Services and Experiential Learning · Illinois Institute of Technology · MTCC Room 106 · 312.567.6800 · <a href="https://elevate.iit.edu">elevate.iit.edu</a></div>
-  <div>© 2026 Freddrick Logan, PhD · <a href="https://fredlogan.phd">fredlogan.phd</a></div>
+  <div>© <span data-year></span> Freddrick Logan, PhD · <a href="https://fredlogan.phd">fredlogan.phd</a></div>
 </div></footer>
 <script src="assets/config.js"></script>
 <script src="assets/site.js"></script>
@@ -117,10 +128,17 @@ CHECKLIST: ${['c1','c2','c3','c4','c5','c6'].map((k,i)=>(PW.get(k,false)?'[x]':'
 function exportText(){ PW.download('Elevate-Portfolio-Worksheet.txt', sheet()); }
 function emailIt(){ location.href='mailto:'+C.staffEmail+'?subject='+encodeURIComponent('Portfolio Workshop worksheet: '+PW.get('h_name',''))+'&body='+encodeURIComponent(sheet()); }
 function clearAll(){ if(confirm('Clear everything you typed on this device?')){ localStorage.removeItem('elevate-portfolio-workshop'); location.reload(); } }
-function aboutPrev(){ const a=PW.get('about1',''),b=PW.get('about2',''); document.getElementById('aboutPreview').textContent=(a||b)?(a+' '+b).trim():'Your About Me will appear here.'; }
+function wcount(el,t,max,empty){ if(!el) return; if(!t){ el.textContent=''; el.className='wc'; return; } const n=t.split(/\s+/).filter(Boolean).length; el.textContent='· '+n+' words'+(n>max?' (trim to under '+max+')':''); el.className='wc '+(n>max?'over':'ok'); }
+function aboutPrev(){ const a=PW.get('about1','').trim(),b=PW.get('about2','').trim(); const t=(a||b)?(a+' '+b).trim():''; document.getElementById('aboutPreview').textContent=t||'Your About Me will appear here.'; wcount(document.getElementById('wcAbout'),t,50); }
+function carPrev(){ const g=k=>PW.get(k,'').trim(); const el=document.getElementById('carPreview'); if(!el) return; const parts=[['Challenge',g('car_c')],['Action',g('car_a')],['Result',g('car_r')]].filter(p=>p[1]);
+  if(!parts.length){ el.textContent='Fill Challenge, Action, and Result to see your case study.'; wcount(document.getElementById('wcCar'),'',120); return; }
+  const t=(g('car_title')?g('car_title')+'\n\n':'')+parts.map(p=>p[0]+': '+p[1]).join('\n'); el.textContent=t; wcount(document.getElementById('wcCar'),parts.map(p=>p[1]).join(' '),120); }
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('bookBtn').href=C.bookingUrl; document.getElementById('checkinBtn').href=C.checkinUrl;
   document.querySelectorAll('[data-store^="about"]').forEach(el=>el.addEventListener('input',aboutPrev)); aboutPrev();
+  document.querySelectorAll('[data-store^="car_"]').forEach(el=>el.addEventListener('input',carPrev)); carPrev();
+  document.querySelectorAll('.fill[data-target]').forEach(b=>b.addEventListener('click',()=>{ const el=document.querySelector('[data-store="'+b.dataset.target+'"]'); if(!el) return;
+    if(el.value.trim() && !confirm('Replace what you typed with the formula?')) return; el.value=b.dataset.text; el.dispatchEvent(new Event('input',{bubbles:true})); el.focus(); const i=el.value.indexOf('['); if(i>-1){ el.setSelectionRange(i, el.value.indexOf(']',i)+1); } }));
   document.querySelectorAll('.check input').forEach(cb=>{ const f=()=>cb.closest('.check').classList.toggle('done',cb.checked); cb.addEventListener('change',f); f(); });
   if(C.formEmbedUrl){ const d=document.getElementById('embedForm'); d.style.display='block'; d.innerHTML='<div class="card"><h2>Submit your worksheet</h2><iframe src="'+C.formEmbedUrl+'" style="width:100%;height:900px;border:0" allowfullscreen></iframe></div>'; }
 });

@@ -126,3 +126,23 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
   input[type=text],textarea{border:1px solid #999}
   .section{padding:14px 0}
 }
+
+/* Writing formulas: shown wherever students are asked to write something */
+.formula{border:1.5px dashed var(--line);border-left:4px solid var(--red);border-radius:10px;padding:10px 14px;margin:8px 0 12px;background:var(--surface);font-size:15px;line-height:1.6;color:var(--ink)}
+.formula .fx{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:2px}
+.formula .b,.hint .b{display:inline-block;padding:0 6px;border-radius:5px;background:var(--surface-2);color:var(--muted);font-weight:600;font-size:.92em;line-height:1.5}
+.formula .eg{display:block;margin-top:4px;color:var(--muted);font-size:.92em}
+.formula ol{margin:2px 0 0;padding-left:20px}
+.fill{background:transparent;border:1px solid var(--line);color:var(--accent);font:inherit;font-size:13px;font-weight:600;border-radius:999px;padding:3px 10px;cursor:pointer;margin:6px 0 0}
+.fill:hover{border-color:var(--accent)}
+.wc{font-size:13px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.wc.ok{color:var(--ink)}.wc.over{color:var(--accent)}
+@media print{.fill{display:none}.formula{border-style:solid}}
+
+/* Sessions, past-session list, and check-in placeholder (dates come from assets/config.js) */
+[hidden]{display:none!important}
+.event-date .d.tbd{font-size:clamp(34px,4.5vw,52px);letter-spacing:0}
+.past-list{list-style:none;padding:0;margin:12px 0 0;max-width:720px}
+.past-list li{padding:10px 0;border-bottom:1px solid var(--line);color:var(--body)}
+.checkin-wait{font-weight:600;margin:0}
+.check input{flex:0 0 22px}

@@ -12,7 +12,7 @@
   .deck{position:relative;height:100vh;width:100vw}
   .bgart{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
   .bgart .orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.55;animation:drift 22s ease-in-out infinite alternate}
-  .bgart .o1{width:48vw;height:48vw;right:-12vw;top:-18vw;background:radial-gradient(closest-side,var(--accent-soft),transparent 70%)}
+  .bgart .o1{width:48vw;height:48vw;right:-12vw;top:-18vw;background:radial-gradient(closest-side,rgba(118,119,123,.14),transparent 70%)}
   .bgart .o2{width:36vw;height:36vw;left:-10vw;bottom:-14vw;background:radial-gradient(closest-side,rgba(255,153,0,.10),transparent 70%);animation-delay:-9s}
   .bgart .grid{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.28;mask-image:radial-gradient(ellipse at 70% 30%,#000 0%,transparent 70%)}
   .slide{position:absolute;inset:0;display:none;padding:5vh 7vw 70px;flex-direction:column;justify-content:center;z-index:1;overflow:auto}
@@ -75,7 +75,7 @@
   .cs .ttl{font-family:var(--serif);font-weight:600;font-size:clamp(18px,1.9vw,26px);color:var(--ink);margin:0 0 10px;line-height:1.15}
   .cs .f{display:grid;grid-template-columns:86px 1fr;gap:6px 10px;font-size:clamp(13px,1.15vw,16px);line-height:1.35;margin:0 0 6px}
   .cs .f b{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);padding-top:3px}
-  .cs .f .num{background:var(--accent-soft);color:var(--accent);font-weight:700;padding:0 5px;border-radius:5px}
+  .cs .f .num{color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent)}
   .cs .visual{background:var(--surface-2);border-left:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;gap:8px}
   .cs .visual svg{width:100%;height:auto;max-height:150px}
   .cs .visual small{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
@@ -98,6 +98,103 @@
   @media (max-width:760px){.slide{padding:4vh 5vw 70px;overflow:auto;justify-content:flex-start}.cols.two,.vs{grid-template-columns:1fr}.vs .mid{text-align:center}.hud{font-size:12px}}
   .slide .cols .box:has(.stat){display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 22px}.slide .cols .box .stat small{font-size:clamp(18px,1.8vw,26px);color:var(--ink);margin:14px auto 0;max-width:24ch;line-height:1.3}.slide.ink .cols .box .stat small{color:#E8E5DD}.slide.accent .cols .box .stat small{color:#FFD2D2}
   @media (prefers-reduced-motion: reduce){.draw,.typing,.pages span,.bgart .orb,.slide.on{animation:none;opacity:1;stroke-dashoffset:0;width:auto}}
+  .slide .formula{font-size:clamp(14px,min(1.35vw,2.3vh),19px);margin:6px 0 10px}
+  .ink .formula{background:#1B1B20;border-color:#2B2B31;border-left-color:#FF4A4A;color:#E8E5DD}.ink .formula .b{background:#2B2B31;color:#C9C6BE}.ink .formula .eg{color:#9A9A9F}
+  .slide p.timer{font-size:clamp(44px,min(8vw,13vh),120px);line-height:1;margin:0 0 10px}
+/* QA pass: never clip tall slides, fit short screens, photo layouts */
+.slide{justify-content:safe center}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,34%);gap:clamp(24px,4vw,64px);align-items:center}
+.split.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.split > *{min-width:0}
+.split h2{max-width:24ch}
+.photo{position:relative;margin:0;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface-2);aspect-ratio:4/5;max-height:66vh;width:100%}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo.wide{aspect-ratio:16/7;max-height:none;border-radius:12px;box-shadow:none}
+.credit{position:absolute;left:10px;bottom:8px;font-size:11px;line-height:1.4;color:#fff;background:rgba(0,0,0,.5);padding:2px 9px;border-radius:999px;text-decoration:none;z-index:2}
+.credit a{color:#fff;text-decoration:none}
+.credit.top{top:10px;bottom:auto}
+.photo img{transition:opacity .25s ease}
+.startrow{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;margin-top:12px}
+.startrow .preview{flex:1 1 220px;margin:0;min-height:5.5em}
+.photo.start{aspect-ratio:3/2;height:clamp(150px,26vh,240px);width:auto;max-width:100%;max-height:none;flex:0 0 auto;border-radius:12px;box-shadow:none;margin:0}
+.photo.start .credit{white-space:normal;max-width:calc(100% - 20px);border-radius:10px;line-height:1.3}
+.slide:has(.startrow) .cols.two{grid-template-columns:minmax(0,1.6fr) minmax(240px,1fr)}
+@media (max-height:920px){.startrow .preview{font-size:clamp(15px,2.2vh,19px);line-height:1.4;padding:12px 14px}.photo.start{height:clamp(140px,24vh,220px)}}
+@media (max-height:760px){.startrow .preview{font-size:clamp(14px,2vh,16px);line-height:1.35;padding:10px 12px;min-height:0}.photo.start{height:clamp(130px,21vh,170px)}}
+.slide.has-bg{isolation:isolate}
+.bgphoto{position:absolute;inset:0;z-index:-1;background-size:cover;background-position:center}
+.slide > .credit{left:auto;right:18px;bottom:46px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:10px 0 18px}
+.duo .box{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:20px 22px}
+.duo svg{width:52px;height:52px;flex:none}
+.duo .stat{font-size:clamp(46px,min(6vw,11vh),92px)!important;margin:4px 0 0}
+.duo .stat small{margin-top:8px;font-size:clamp(15px,1.4vw,19px);color:var(--body)}
+.duo .unit{font-family:var(--sans);font-size:.36em;color:var(--muted);margin-left:6px;letter-spacing:0}
+.steps{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.steps button{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:6px 14px;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px 16px;font:inherit;color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s}
+.steps button:hover{border-color:var(--muted)}
+.steps .n{grid-row:1/3;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);color:var(--muted);font-weight:700;font-size:15px}
+.steps .t{font-weight:600;font-size:clamp(16px,min(1.6vw,2.6vh),21px)}
+.steps .m{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.steps .key{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-left:8px;vertical-align:2px}
+.steps .meter{grid-column:2/4;height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.steps .meter i{display:block;height:100%;background:var(--gray);opacity:.45;transition:background .2s,opacity .2s}
+.steps button.on{border-color:var(--accent);background:var(--surface);box-shadow:inset 4px 0 0 var(--accent)}
+.steps button.on .n{background:var(--accent);color:#fff}
+.steps button.on .meter i{background:var(--accent);opacity:1}
+.detail{position:relative}
+.detail .photo{aspect-ratio:4/5;max-height:62vh}
+.detail .card2{position:absolute;left:14px;right:14px;bottom:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px;box-shadow:var(--shadow);z-index:2}
+.detail .card2 .lead{margin:0;font-size:clamp(16px,min(1.7vw,2.7vh),22px)}
+.detail .card2 h3{font-family:var(--serif);font-size:clamp(20px,min(2vw,3.2vh),28px);margin:0 0 4px;color:var(--ink)}
+.detail .card2 .quiet{margin:6px 0 0}
+@media (max-height:920px){
+  .slide{padding-top:4vh;padding-bottom:58px}
+  .slide h1{font-size:clamp(40px,10vh,96px)}
+  .slide h2{font-size:clamp(28px,6.2vh,56px)}
+  .slide .lead{font-size:clamp(17px,2.7vh,26px)}
+  .slide p,.slide li,.slide label{font-size:clamp(15px,2.35vh,22px)}
+  .slide .cols .box:has(.stat){padding:18px 18px}
+  .slide .cols .box .stat small{font-size:clamp(15px,2.3vh,22px)}
+  .check{padding:5px 0}
+  .ask{margin:4px 0 8px}
+  .photo.wide{aspect-ratio:16/5.5}
+  .cs{grid-template-columns:1fr}.cs .visual{display:none}
+  .cs .f{line-height:1.28;margin:0 0 4px}
+  .cs .body{padding:14px 18px}
+  .seq .step{padding:8px 0}
+}
+@media (max-height:760px){
+  .slide h2{font-size:clamp(26px,5.6vh,44px);margin-bottom:8px}
+  .photo.wide{aspect-ratio:16/4.2}
+  .slide .cols{margin-top:8px}
+  .slide .cols .box:has(.stat){padding:14px 16px}
+}
+@media (max-width:760px){.split,.split.even,.duo{grid-template-columns:1fr}.photo{max-height:40vh}.detail .card2{position:static;margin-top:10px}.slide > .credit{bottom:52px}}
+/* Background photos and paired stat cards (same recipe as the reference deck) */
+.slide.has-bg{isolation:isolate}
+.bgphoto{position:absolute;inset:0;z-index:-1;background-size:cover;background-position:center}
+.slide > .credit{left:auto;right:18px;bottom:46px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:10px 0 18px}
+.duo .box{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:20px 22px}
+.duo svg{width:52px;height:52px;flex:none}
+.duo svg.wide{width:96px;height:64px}
+.duo .stat{font-size:clamp(46px,min(6vw,11vh),92px)!important;margin:4px 0 0}
+.duo .stat small{margin-top:8px;font-size:clamp(15px,1.4vw,19px);color:var(--body)}
+.duo .unit{font-family:var(--sans);font-size:.36em;color:var(--muted);margin-left:6px;letter-spacing:0}
+.photo.side{margin-top:12px}
+@media (max-height:920px){.duo .stat{font-size:clamp(40px,min(5vw,9vh),76px)!important}.duo .box{padding:14px 18px}.duo .stat small{font-size:clamp(14px,1.3vw,17px);margin-top:6px}}
+@media (max-height:760px){.duo .stat small{line-height:1.25}.photo.start.side{height:clamp(110px,18vh,150px)}}
+@media (max-width:760px){.duo{grid-template-columns:1fr}.slide > .credit{bottom:52px}}
+/* Why slide: bigger drawings, stats aligned under them, vs. centred */
+.vs{align-items:center}
+.vs > div{display:flex;flex-direction:column;align-items:center;text-align:center}
+.vs .mid{text-align:center;align-self:center}
+.vs .art{width:min(100%,360px);height:auto;max-height:240px;margin:0 auto 6px}
+.vs .stat{font-size:clamp(36px,min(5vw,9vh),72px)!important}
+.vs .stat small{margin-left:auto;margin-right:auto;max-width:30ch}
+@media (max-height:920px){.vs{gap:18px}.vs .art{width:min(100%,300px);max-height:185px}.vs .stat{font-size:clamp(32px,min(4.5vw,8vh),64px)!important}.slide:has(.cols + .ask) .cols{margin-top:10px}.slide:has(.cols + .ask) .cols .box .stat{font-size:clamp(40px,min(5.2vw,8.5vh),80px)!important}.slide:has(.cols + .ask) .cols .box .stat small{margin-top:10px}}
+@media (max-height:760px){.vs .art{width:min(100%,190px);max-height:110px}.tight-hide{display:none}.slide .formula{font-size:clamp(13px,2.1vh,16px);padding:8px 12px;line-height:1.5}.seq .step{padding:6px 0}.slide .cols .box .stat small{line-height:1.25}}
 </style>
 </head>
 <body>
@@ -106,14 +203,16 @@
 <div class="deck" id="deck">
 
 <!-- 1 Title -->
-<section class="slide on accent">
+<section class="slide on accent has-bg">
+  <div class="bgphoto" style="background-image:linear-gradient(135deg,rgba(204,0,0,.93) 0%,rgba(140,0,0,.9) 100%),url('https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=1920&q=75&auto=format&fit=crop')"></div>
+  <span class="credit">Photo: <a href="https://unsplash.com/@themephotos?utm_source=elevate_workshops&amp;utm_medium=referral">Theme Photos</a> / <a href="https://unsplash.com/?utm_source=elevate_workshops&amp;utm_medium=referral">Unsplash</a></span>
   <img class="reveal" src="assets/elevate-logo-white.png" alt="Illinois Tech Elevate" style="height:78px;width:auto;align-self:flex-start;margin-bottom:30px">
   <div class="eyebrow reveal">Elevate Workshop · Career Services and Experiential Learning</div>
   <h1 class="reveal">Proof beats promises.</h1>
   <p class="lead reveal">A résumé says what you can do. A portfolio shows it. In 45 minutes you will have the first piece of yours.</p>
   <div class="reveal" style="margin-top:34px;display:flex;gap:34px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.35);padding-top:16px;max-width:760px">
-    <div><div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#FFD2D2">Thursday</div><div style="font-size:clamp(16px,1.6vw,22px);font-weight:600">October 8, 2026 · 12:45 p.m.</div></div>
-    <div><div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#FFD2D2">Where</div><div style="font-size:clamp(16px,1.6vw,22px);font-weight:600">Hermann Hall 010</div></div>
+    <div><div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#FFD2D2" data-session="weekday"></div><div style="font-size:clamp(16px,1.6vw,22px);font-weight:600" data-session="datetime"></div></div>
+    <div data-when="upcoming"><div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#FFD2D2">Where</div><div style="font-size:clamp(16px,1.6vw,22px);font-weight:600" data-session="wherex"></div></div>
     <div><div style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#FFD2D2">With</div><div style="font-size:clamp(16px,1.6vw,22px);font-weight:600">Freddrick Logan, PhD</div></div>
   </div>
 </section>
@@ -131,26 +230,31 @@
       </svg>
       <div class="ask">Live poll · Q1</div>
       <p class="lead">Search it now. What is the first thing a recruiter sees? Answer on your phone; the chart draws itself on screen.</p>
-      <p class="quiet">Poll: <b>forms.cloud.microsoft/r/pfXcjYeuB3</b> · or the QR on the Poll page</p>
+      <p class="quiet">Poll: <b class="pollShort"></b> · or the QR on the Poll page</p>
     </div>
-    <div class="box reveal" style="text-align:center;display:flex;flex-direction:column;justify-content:center">
+    <div class="box reveal" style="text-align:center;display:flex;flex-direction:column;justify-content:center;padding:16px 20px">
       <p class="timer" id="t60">60</p>
-      <p><button class="btn" onclick="startTimer(60,'t60')">Start the clock</button></p>
-      <p class="quiet">If the answer is "nothing," someone else controls your first impression.</p>
+      <p style="margin:0 0 6px"><button class="btn" onclick="startTimer(60,'t60')">Start the clock</button></p>
+      <p class="quiet" style="margin:0">If the answer is "nothing," someone else controls your first impression.</p>
     </div>
   </div>
 </section>
 
 <!-- 3 Roadmap -->
 <section class="slide ink">
-  <div class="eyebrow reveal">The next 45 minutes</div>
-  <h2 class="reveal">One idea, one project, one page.</h2>
-  <div class="cols">
-    <div class="box reveal"><p class="stat" style="font-size:clamp(60px,7.5vw,120px)">1<small>Hold one idea: show, don't tell</small></p></div>
-    <div class="box reveal"><p class="stat" style="font-size:clamp(60px,7.5vw,120px)">1<small>Turn one project from your life into a case study today</small></p></div>
-    <div class="box reveal"><p class="stat" style="font-size:clamp(60px,7.5vw,120px)">1<small>Publish one page this week</small></p></div>
+  <div class="split">
+    <div>
+      <div class="eyebrow reveal">The next 45 minutes</div>
+      <h2 class="reveal">One idea, one project, one page.</h2>
+      <div class="seq" style="max-width:760px">
+        <div class="step reveal"><div class="n">1</div><div><b style="color:#F4F2EC">Idea.</b> Show, don't tell. Proof beats promises.</div></div>
+        <div class="step reveal"><div class="n">2</div><div><b style="color:#F4F2EC">Project.</b> Turn one thing you already made into a case study, today.</div></div>
+        <div class="step reveal"><div class="n">3</div><div><b style="color:#F4F2EC">Page.</b> Publish it this week on a platform that fits your field.</div></div>
+      </div>
+      <p class="lead reveal" style="margin-top:18px">Bring one project to mind now: a class, a job, a club, a thing you built because you wanted to.</p>
+    </div>
+    <figure class="photo reveal" style="box-shadow:none"><img src="https://images.unsplash.com/photo-1618788372246-79faff0c3742?w=900&q=80&auto=format&fit=crop&crop=faces" alt="A website wireframe sketched on a tablet" style="object-position:50% 50%"><span class="credit">Photo: <a href="https://unsplash.com/@fazurrehman?utm_source=elevate_workshops&amp;utm_medium=referral">Faizur Rehman</a> / <a href="https://unsplash.com/?utm_source=elevate_workshops&amp;utm_medium=referral">Unsplash</a></span></figure>
   </div>
-  <p class="lead reveal" style="margin-top:22px">Bring one project to mind now: a class, a job, a club, a thing you built because you wanted to.</p>
 </section>
 
 <!-- 4 Why -->
@@ -186,6 +290,7 @@
 <section class="slide">
   <div class="eyebrow reveal">0:10 · The raw material</div>
   <h2 class="reveal">Who you are, in two sentences.</h2>
+  <div class="formula reveal" style="max-width:900px"><span class="fx">Formula for yours</span>I'm a <span class="b">year + major</span> who <span class="b">what you build or do</span>. I <span class="b">value you bring</span> because <span class="b">what drives you</span>.<span class="eg tight-hide">e.g. I'm a third-year mechanical engineering student who builds test rigs. I turn messy data into decisions because I like being the person the team trusts with the numbers.</span></div>
   <div class="cols two">
     <div class="box reveal">
       <label>Who you are and what you do</label>
@@ -200,6 +305,8 @@
 
 <!-- 6 CAR -->
 <section class="slide ink">
+  <div class="split">
+  <div>
   <div class="eyebrow reveal">0:13 · The story shape</div>
   <h2 class="reveal">Every project is a story with a number at the end.</h2>
   <div class="seq" style="max-width:900px">
@@ -207,17 +314,27 @@
     <div class="step reveal"><div class="n">A</div><div><b style="color:#F4F2EC">Action.</b> What <i>you</i> did: tools, decisions, hours.</div></div>
     <div class="step reveal"><div class="n">R</div><div><b style="color:#F4F2EC">Result.</b> Quantified. "Cut load time 40%." "Second of 31 teams." "Saved the club $1,200."</div></div>
   </div>
-  <div class="ask reveal" style="margin-top:18px">Ask the room</div>
+  <div class="formula reveal" style="margin-top:12px;max-width:900px"><span class="fx">Formula for yours</span>Challenge: <span class="b">problem + stakes</span>. Action: <span class="b">what you did, tools, hours</span>. Result: <span class="b">a number</span>.</div>
+  <div class="ask reveal" style="margin-top:10px">Ask the room</div>
   <p class="lead reveal">Call out a project. We build its CAR together on the next slide.</p>
+  </div>
+  <figure class="photo reveal" style="box-shadow:none"><img src="https://images.unsplash.com/photo-1741699427768-fbb97fc21425?w=900&q=80&auto=format&fit=crop&crop=faces" alt="A student writing at a laptop in a quiet library" style="object-position:50% 40%"><span class="credit">Photo: <a href="https://unsplash.com/@zoshuacolah?utm_source=elevate_workshops&amp;utm_medium=referral">Zoshua Colah</a> / <a href="https://unsplash.com/?utm_source=elevate_workshops&amp;utm_medium=referral">Unsplash</a></span></figure>
+  </div>
 </section>
 
 <!-- 7 Discipline examples -->
 <section class="slide">
-  <div class="eyebrow reveal">It works in every major</div>
-  <h2 class="reveal">Pick your field.</h2>
-  <div class="tabs reveal" id="tabs"></div>
-  <div class="box reveal" id="tabBody" style="font-size:clamp(19px,2.2vw,30px);font-family:var(--serif);line-height:1.45"></div>
-  <p class="quiet reveal" style="margin-top:14px">Every Result has a number. If yours doesn't yet, measure something: counts, percentages, placements, hours saved.</p>
+  <div class="split">
+    <div>
+      <div class="eyebrow reveal">It works in every major</div>
+      <h2 class="reveal">Pick your field.</h2>
+      <div class="tabs reveal" id="tabs"></div>
+      <div class="box reveal" id="tabBody" style="font-size:clamp(19px,min(2.2vw,3.4vh),30px);font-family:var(--serif);line-height:1.45"></div>
+      <div class="formula reveal"><span class="fx">Formula for yours</span><span class="b">Project</span>: <span class="b">Challenge</span> → <span class="b">Action</span> → <span class="b">Result with a number</span>.</div>
+      <p class="quiet reveal tight-hide" style="margin-top:6px">Every Result has a number. If yours doesn't yet, measure something: counts, percentages, placements, hours saved.</p>
+    </div>
+    <figure class="photo reveal" id="fieldFig"><img src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=900&q=80&auto=format&fit=crop&crop=faces" alt="A young developer coding on a laptop" style="object-position:50% 40%"><span class="credit">Photo: <a href="https://unsplash.com/@nublson?utm_source=elevate_workshops&amp;utm_medium=referral">Nubelson Fernandes</a> / <a href="https://unsplash.com/?utm_source=elevate_workshops&amp;utm_medium=referral">Unsplash</a></span></figure>
+  </div>
 </section>
 
 <!-- 8 Platform match -->
@@ -236,9 +353,9 @@
         <option value="sci">Sciences, research, pre-health</option>
         <option value="other">Humanities, social sciences, other</option>
       </select>
-      <div class="preview" id="platformOut" style="margin-top:12px">Pick a field to see a recommended platform.</div>
+      <div class="startrow"><div class="preview" id="platformOut">Pick a field to see a recommended platform.</div><figure class="photo start" id="startFig"><img src="https://images.unsplash.com/photo-1567168539593-59673ababaae?w=900&q=80&auto=format&fit=crop&crop=faces" alt="A student reading in a library" style="object-position:50% 40%"><span class="credit">Photo: <a href="https://unsplash.com/@dollargill?utm_source=elevate_workshops&amp;utm_medium=referral">Dollar Gill</a> / <a href="https://unsplash.com/?utm_source=elevate_workshops&amp;utm_medium=referral">Unsplash</a></span></figure></div>
     </div>
-    <div class="box reveal" style="text-align:center"><div class="ask">Live poll · Q2</div><p style="margin:0 0 10px">Which platform are you committing to?</p><img src="assets/poll-qr.png" alt="Poll QR" style="width:min(200px,40vw);background:#fff;padding:6px;border-radius:10px"><p class="quiet">forms.cloud.microsoft/r/pfXcjYeuB3</p></div>
+    <div class="box reveal" style="text-align:center"><div class="ask">Live poll · Q2</div><p style="margin:0 0 10px">Which platform are you committing to?</p><img src="assets/poll-qr.png" alt="Poll QR" style="width:min(200px,40vw);background:#fff;padding:6px;border-radius:10px"><p class="quiet pollShort"></p></div>
   </div>
   <p class="quiet reveal" style="margin-top:12px">LinkedIn is the front door, not the house. Google Slides is a draft, not a destination.</p>
 </section>
@@ -267,12 +384,15 @@
       <p class="lead" id="bpTitle" style="margin:14px 0 6px;font-family:var(--serif);font-weight:600">Home</p>
       <p class="lead" id="bpText" style="margin-top:0">Who you are in one line, one strong visual, and a way in. A recruiter decides here whether to click.</p>
       <p class="quiet" id="bpHint">Tap a page. Auto-advances every 6 seconds until you do.</p>
+      <div style="display:flex"><figure class="photo start side reveal"><img src="https://images.unsplash.com/photo-1727204898165-f9e5ca0b9313?w=900&q=80&auto=format&fit=crop&crop=faces" alt="Students presenting their work on posters in a classroom" style="object-position:50% 40%"><span class="credit">Photo: <a href="https://unsplash.com/@heftiba?utm_source=elevate_workshops&amp;utm_medium=referral">Toa Heftiba</a> / <a href="https://unsplash.com/?utm_source=elevate_workshops&amp;utm_medium=referral">Unsplash</a></span></figure></div>
     </div>
   </div>
 </section>
 
 <!-- 10 Where content comes from -->
-<section class="slide ink">
+<section class="slide ink has-bg">
+  <div class="bgphoto" style="background-image:linear-gradient(180deg,rgba(18,18,20,.80) 0%,rgba(18,18,20,.93) 55%,rgba(18,18,20,.97) 100%),url('https://images.unsplash.com/photo-1479520997871-76c75ea2b67a?w=1920&q=70&auto=format&fit=crop')"></div>
+  <span class="credit">Photo: <a href="https://unsplash.com/@peterlaster?utm_source=elevate_workshops&amp;utm_medium=referral">Pedro Lastra</a> / <a href="https://unsplash.com/?utm_source=elevate_workshops&amp;utm_medium=referral">Unsplash</a></span>
   <div class="eyebrow reveal">You have more than you think</div>
   <h2 class="reveal">Your evidence already exists. It just isn't published.</h2>
   <div class="cols">
@@ -292,7 +412,7 @@
     <div class="reveal">
       <div class="tabs" id="csTabs" style="margin-bottom:10px"></div>
       <div class="cs" id="csCard"></div>
-      <p class="quiet" style="margin-top:10px">A finished case study looks like this: six short fields and one picture. Real ones from your college are on the <b>Resources</b> page → <i>See what good looks like</i>.</p>
+      <p class="quiet tight-hide" style="margin-top:10px">A finished case study looks like this: six short fields and one picture. Real ones from your college are on the <b>Resources</b> page → <i>See what good looks like</i>.</p>
     </div>
     <div class="reveal">
       <div class="box" style="text-align:center;margin-bottom:14px"><p class="timer" id="t8" style="margin:0 0 8px">8:00</p><p style="margin:0"><button class="btn" onclick="startTimer(480,'t8')">Start 8:00</button> <button class="btn ghost small" onclick="startTimer(180,'t8')">3:00 swap</button></p></div>
@@ -300,9 +420,10 @@
         <div class="step"><div class="n" style="font-size:22px;min-width:3.2em">8:00</div><div>Fill the six fields on the <b>Handout</b> page for one project of yours. Result must have a number, even an estimate.</div></div>
         <div class="step"><div class="n" style="font-size:22px;min-width:3.2em">3:00</div><div>Swap phones with a neighbor. They ask the one question your case study doesn't answer. That question is your revision plan.</div></div>
       </div>
+      <div class="formula reveal" style="margin:8px 0 0"><span class="fx">Formula for yours</span><span class="b">Title</span>. Challenge: <span class="b">problem + stakes</span>. Action: <span class="b">what you did, tools, hours</span>. Result: <span class="b">a number</span>. Tools: <span class="b">list</span>. Proof: <span class="b">screenshot, chart, photo, or link</span>.</div>
     </div>
   </div>
-  <p class="lead reveal" style="margin-top:8px;font-size:clamp(17px,1.8vw,24px)">That is 20% of a portfolio. The other 80% is repetition, not inspiration.</p>
+  <p class="lead reveal tight-hide" style="margin-top:8px;font-size:clamp(17px,1.8vw,24px)">That is 20% of a portfolio. The other 80% is repetition, not inspiration.</p>
 </section>
 
 <!-- 12 Checklist -->
@@ -327,7 +448,7 @@
   <div class="eyebrow reveal">Check in for Elevate credit</div>
   <h2 class="reveal" style="max-width:none">Recruiters believe what they can see.<br>Give them something to see.</h2>
   <div class="cols two">
-    <div class="box reveal" style="background:#fff;color:#111;text-align:center;border-color:#fff"><img src="assets/checkin-qr.png" alt="312 check-in QR" style="width:min(240px,55vw)"><p style="color:#111;margin:6px 0 0;font-size:18px"><b>Scan to check in on 312</b><br><span style="font-size:14px;color:#555">cglink.me/224/c38490410115754</span></p></div>
+    <div class="box reveal" style="background:#fff;color:#111;text-align:center;border-color:#fff"><div data-checkin="slide"><img src="assets/checkin-qr.png" alt="312 check-in QR" style="width:min(240px,55vw)"><p style="color:#111;margin:6px 0 0;font-size:18px"><b>Scan to check in on 312</b><br><span style="font-size:14px;color:#555" id="checkinShort"></span></p></div></div>
     <div class="box reveal"><p><b>Then</b></p><p>1. Finish the handout and download it.<br>2. Book a portfolio review.<br>3. Publish page one this week.</p><p class="quiet" style="color:#FFD2D2">Career Services and Experiential Learning · MTCC Room 106 · 312.567.6800</p></div>
   </div>
 </section>
@@ -337,9 +458,9 @@
   <div class="eyebrow reveal">Questions</div>
   <h2 class="reveal" style="max-width:none">What's still in the way?</h2>
   <div class="cols">
-    <div class="box reveal" style="text-align:center"><img src="assets/qa-qr.png" alt="Question form QR" style="width:min(220px,50vw);background:#fff;padding:8px;border-radius:12px"><p style="margin:10px 0 0"><b>Ask or leave feedback</b><br><span class="quiet">forms.cloud.microsoft/r/0mf1JThAqw</span></p></div>
+    <div class="box reveal" style="text-align:center"><img src="assets/qa-qr.png" alt="Question form QR" style="width:min(220px,50vw);background:#fff;padding:8px;border-radius:12px"><p style="margin:10px 0 0"><b>Ask or leave feedback</b><br><span class="quiet" id="qaShort"></span></p></div>
     <div class="box reveal" style="text-align:center"><img src="assets/booking-qr.png" alt="Booking QR" style="width:min(220px,50vw);background:#fff;padding:8px;border-radius:12px"><p style="margin:10px 0 0"><b>Book a 30-minute portfolio review</b><br><span class="quiet">Freddrick Logan · Career Services and Experiential Learning</span></p></div>
-    <div class="box reveal" style="text-align:center"><img src="assets/checkin-qr.png" alt="312 check-in QR" style="width:min(220px,50vw);background:#fff;padding:8px;border-radius:12px"><p style="margin:10px 0 0"><b>Check in on 312</b><br><span class="quiet">records your Elevate workshop credit</span></p></div>
+    <div class="box reveal" style="text-align:center"><div data-checkin="slide"><img src="assets/checkin-qr.png" alt="312 check-in QR" style="width:min(220px,50vw);background:#fff;padding:8px;border-radius:12px"><p style="margin:10px 0 0"><b>Check in on 312</b><br><span class="quiet">records your Elevate workshop credit</span></p></div></div>
   </div>
   <p class="lead reveal" style="margin-top:18px">Take your handout with you: download, email, or print it from the Handout page. Publish page one this week.</p>
 </section>
@@ -348,7 +469,7 @@
 
 <div class="notes" id="notes"></div>
 <div class="hud">
-  <span><span id="count">1 / 14</span> · © 2026 Freddrick Logan, PhD · <a href="https://fredlogan.phd" style="margin-left:0">fredlogan.phd</a></span>
+  <span><span id="count">1 / 14</span> · © <span data-year></span> Freddrick Logan, PhD · <a href="https://fredlogan.phd" style="margin-left:0">fredlogan.phd</a></span>
   <span><a href="#" onclick="go(-1);return false">◀ Prev</a><a href="#" onclick="go(1);return false">Next ▶</a><a href="#" onclick="toggleNotes();return false">Notes (N)</a><a href="#" onclick="openPresenter();return false">Presenter (P)</a><a href="#" onclick="PW.toggleTheme();return false">Theme (T)</a><a href="index.html">Home</a><a href="handout.html">Handout</a></span>
 </div>
 
@@ -387,6 +508,30 @@ const PLAT = {
  sci:"<b>Notion</b> or a simple <b>personal site</b>. Lab reports, posters, protocols, and data visualizations are your evidence; link your ORCID or publications.",
  other:"<b>Notion</b> or <b>WordPress</b>. Writing samples, research, event projects, and leadership roles framed as CAR case studies."
 };
+const PHOTO={
+ 'Computer Science': {src:"https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"A young developer coding on a laptop", name:"Nubelson Fernandes", handle:"nublson", pos:"50% 40%"},
+ 'Architecture': {src:"https://images.unsplash.com/photo-1649688066830-a0cf04d1bc41?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"An architecture student drafting at a drawing table", name:"Ryan Ancill", handle:"ryanancill", pos:"50% 40%"},
+ 'Business': {src:"https://images.unsplash.com/photo-1762784575331-66618cc4884a?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"A student presenting a plan at a whiteboard", name:"Rodrigo Rodrigues", handle:"wolfart32", pos:"50% 35%"},
+ 'Electrical Eng.': {src:"https://images.unsplash.com/photo-1650530415027-dc9199f473ec?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"An engineer testing a circuit board at a bench with an oscilloscope", name:"Axel Richter", handle:"trisolarian", pos:"50% 45%"},
+ 'Civil / Mechanical': {src:"https://images.unsplash.com/photo-1581092575198-f8970a271aa0?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"An engineering student sketching a structure on a whiteboard", name:"ThisisEngineering", handle:"thisisengineering", pos:"50% 40%"},
+ 'Sciences': {src:"https://images.unsplash.com/photo-1766297248047-6ec337099802?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"A science student holding a flask in a laboratory", name:"Chidera Faustina Okeke", handle:"thefourthwxll", pos:"50% 40%"}
+};
+const PHOTO2={
+ '': {src:"https://images.unsplash.com/photo-1567168539593-59673ababaae?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"A student reading in a library", name:"Dollar Gill", handle:"dollargill", pos:"50% 40%"},
+ 'cs': {src:"https://images.unsplash.com/photo-1702047149248-a6049168d2a8?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"Programmers working on laptops around a meeting table", name:"Creatopy", handle:"creatopy", pos:"50% 45%"},
+ 'design': {src:"https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"A designer drawing on a tablet with a stylus", name:"Kelly Sikkema", handle:"kellysikkema", pos:"50% 50%"},
+ 'eng': {src:"https://images.unsplash.com/photo-1581091212911-f4efc3f71c48?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"Two engineering students working together at a lab bench", name:"ThisisEngineering", handle:"thisisengineering", pos:"50% 40%"},
+ 'biz': {src:"https://images.unsplash.com/photo-1686984197046-1925353b0ace?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"A student presenting at a whiteboard", name:"Mina Rad", handle:"miinrad", pos:"50% 35%"},
+ 'sci': {src:"https://images.unsplash.com/photo-1631816285969-2628b4ef3489?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"A scientist working at a laboratory bench", name:"CDC", handle:"cdc", pos:"50% 45%"},
+ 'other': {src:"https://images.unsplash.com/photo-1758525861622-f4e7ac86a2d7?w=900&q=80&auto=format&fit=crop&crop=faces", alt:"A student thinking over notes at a desk", name:"Vitaly Gariev", handle:"silverkblack", pos:"50% 40%"}
+};
+const UTM='?utm_source=elevate_workshops&utm_medium=referral';
+function swapPhoto(id,p){ const fig=document.getElementById(id); if(!fig||!p) return; const img=fig.querySelector('img'), cr=fig.querySelector('.credit');
+  if(img.dataset.src===p.src) return; img.dataset.src=p.src;
+  const apply=()=>{ img.onload=()=>{ img.style.opacity='1'; }; img.alt=p.alt; img.style.objectPosition=p.pos||'50% 50%'; img.src=p.src; if(img.complete&&img.naturalWidth) img.style.opacity='1';
+    cr.innerHTML='Photo: <a href="https://unsplash.com/@'+p.handle+UTM+'">'+p.name+'</a> / <a href="https://unsplash.com/'+UTM+'">Unsplash</a>'; };
+  img.style.opacity='0'; setTimeout(apply,250); }
+function preloadPhotos(){ [...Object.values(PHOTO),...Object.values(PHOTO2)].forEach(p=>{ const i=new Image(); i.src=p.src; }); }
 const slides=[...document.querySelectorAll('.slide')]; let i=0;
 function replay(s){ s.querySelectorAll('.reveal,.draw,.typing,.pages span').forEach(el=>{ el.style.animation='none'; void el.offsetWidth; el.style.animation=''; }); }
 function show(n){ const prev=i; i=Math.max(0,Math.min(slides.length-1,n)); slides.forEach((s,k)=>{s.classList.toggle('on',k===i); s.classList.toggle('back',k===i&&i<prev);}); replay(slides[i]);
@@ -438,11 +583,13 @@ function bpShow(k,manual){ bpIdx=bpKeys.indexOf(k); Object.keys(BP).forEach(x=>{
   const t=document.getElementById('bpTitle'),x=document.getElementById('bpText'); t.textContent=BP[k][0]; x.textContent=BP[k][1]; [t,x].forEach(el=>{el.style.animation='none'; void el.offsetWidth; el.style.animation='rise .5s var(--ease)';});
   if(manual){ clearInterval(bpTimer); bpTimer=null; document.getElementById('bpHint').textContent='Tap another page, or press → to move on.'; } }
 function bpStart(){ clearInterval(bpTimer); bpShow('home'); bpTimer=setInterval(()=>bpShow(bpKeys[(bpIdx+1)%bpKeys.length]),6000); }
-function matchPlatform(){ const v=document.getElementById('major').value; document.getElementById('platformOut').innerHTML= v?PLAT[v]:'Pick a field to see a recommended platform.'; }
+function matchPlatform(){ const v=document.getElementById('major').value; document.getElementById('platformOut').innerHTML= v?PLAT[v]:'Pick a field to see a recommended platform.'; swapPhoto('startFig',PHOTO2[v]||PHOTO2['']); }
 function aboutPrev(){ const a=PW.get('about1',''),b=PW.get('about2',''); document.getElementById('aboutPreview').textContent=(a||b)?(a+' '+b).trim():'Your About Me will appear here.'; }
 document.addEventListener('DOMContentLoaded',()=>{
+  preloadPhotos();
+  const CF=window.PW_CONFIG||{}; const cs=document.getElementById('checkinShort'); if(cs) cs.textContent=(CF.checkinUrl||'').replace('https://',''); const qs=document.getElementById('qaShort'); if(qs) qs.textContent=(CF.qaUrl||'').replace('https://',''); document.querySelectorAll('.pollShort').forEach(e=>e.textContent=(CF.pollUrl||'').replace('https://','')||'poll opens on workshop day');
   const tabs=document.getElementById('tabs'),body=document.getElementById('tabBody'); let first=true;
-  Object.keys(EX).forEach(k=>{ const b=document.createElement('button'); b.textContent=k; b.onclick=()=>{[...tabs.children].forEach(x=>x.classList.remove('on')); b.classList.add('on'); body.innerHTML='<p style="margin:0">'+EX[k]+'</p>';}; tabs.appendChild(b); if(first){b.click();first=false;} });
+  Object.keys(EX).forEach(k=>{ const b=document.createElement('button'); b.textContent=k; b.onclick=()=>{[...tabs.children].forEach(x=>x.classList.remove('on')); b.classList.add('on'); body.innerHTML='<p style="margin:0">'+EX[k]+'</p>'; swapPhoto('fieldFig',PHOTO[k]);}; tabs.appendChild(b); if(first){b.click();first=false;} });
   document.querySelectorAll('[data-store^="about"]').forEach(el=>el.addEventListener('input',aboutPrev)); aboutPrev();
   document.getElementById('bookLink').href=(window.PW_CONFIG||{}).bookingUrl||'#';
   document.querySelectorAll('#bpTabs span').forEach(t=>t.onclick=()=>bpShow(t.dataset.p,true));

@@ -34,6 +34,14 @@ Upload the folder as-is to any static host (for example `fredlogan.phd/portfolio
 
 ## Update for the next session
 
-Change `eventDate`, `eventTime`, `eventRoom`, and `checkinUrl` in `assets/config.js`, replace `assets/checkin-qr.png` with the new 312 QR, and update the date on slide 1 in `slides.html`.
+To schedule the next session, add an entry to `sessions` in `assets/config.js`:
+
+```js
+sessions: [
+  { date: "YYYY-MM-DD", start: "12:45", end: "13:45", room: "Hermann Hall 010", doors: "12:30" }
+]
+```
+
+Dates and times are Chicago time (America/Chicago) on a 24-hour clock. The pages read this list at load time and show the next session that has not ended yet on the home page, slide 1, the handout header, and the presenter and facilitator pages. Once a session's end time passes it moves to the "Past sessions" list on the home page. When nothing is scheduled the pages say "Next workshop: TBD" and the 312 check-in QR is replaced with "Check-in opens at the next session"; booking and Q&A stay live. If the 312 check-in link changes, update `checkinUrl` and replace `assets/checkin-qr.png`.
 
 © Illinois Institute of Technology, Career Services and Experiential Learning. Logo used with permission of the department.

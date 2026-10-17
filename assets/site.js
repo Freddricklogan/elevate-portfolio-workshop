@@ -55,7 +55,60 @@ window.PW = (function () {
     const b = document.createElement('button'); b.className = 'theme-btn'; b.type = 'button'; b.title = 'Switch light / dark';
     b.textContent = currentTheme() === 'dark' ? '☀ Light' : '☾ Dark'; b.onclick = toggleTheme; nav.appendChild(b);
   }
-  function init() { bindInputs(); document.querySelectorAll('[data-tally]').forEach(tally); themeButton(); }
+
+  /* Sessions: config.sessions compared with the clock in America/Chicago. A session is past once its end time passes. */
+  const TZ = 'America/Chicago';
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  function nowKey() { /* "YYYY-MM-DDTHH:MM" as read on a Chicago clock */
+    try {
+      const p = {}; new Intl.DateTimeFormat('en-US', { timeZone: TZ, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date()).forEach(x => p[x.type] = x.value);
+      return p.year + '-' + p.month + '-' + p.day + 'T' + (p.hour === '24' ? '00' : p.hour) + ':' + p.minute;
+    } catch (e) { return new Date().toISOString().slice(0, 16); }
+  }
+  function ymd(s) { const a = String(s.date).split('-').map(Number); return { y: a[0], m: a[1], d: a[2], dow: new Date(Date.UTC(a[0], a[1] - 1, a[2])).getUTCDay() }; }
+  function t12(t) { const a = String(t || '0:00').split(':').map(Number); let h = a[0]; const ap = h >= 12 ? 'p.m.' : 'a.m.'; h = h % 12 || 12; return { s: h + ':' + String(a[1] || 0).padStart(2, '0'), ap }; }
+  function timeRange(s) { const a = t12(s.start), b = t12(s.end); return (a.ap === b.ap ? a.s : a.s + ' ' + a.ap) + '–' + b.s + ' ' + b.ap; }
+  function longDate(s) { const o = ymd(s); return DAYS[o.dow] + ', ' + MONTHS[o.m - 1] + ' ' + o.d + ', ' + o.y; }
+  function endKey(s) { return s.date + 'T' + (s.end || '23:59'); }
+  function sessions() {
+    const C = window.PW_CONFIG || {}; const now = nowKey();
+    const all = (Array.isArray(C.sessions) ? C.sessions : []).filter(s => s && /^\d{4}-\d{2}-\d{2}$/.test(String(s.date)))
+      .slice().sort((a, b) => endKey(a).localeCompare(endKey(b)));
+    const past = all.filter(s => endKey(s) < now), upcoming = all.filter(s => !(endKey(s) < now));
+    return { all, past, upcoming, next: upcoming[0] || null, now };
+  }
+  function sessionText(n) {
+    const C = window.PW_CONFIG || {}; const teams = C.teamsUrl ? ' · Teams' : '';
+    if (!n) return { long: 'Next workshop: TBD', weekday: 'Next workshop', datetime: 'TBD', date: 'TBD', time: 'TBD', doors: 'Date and room to be announced', where: '', wherex: '', day: 'TBD', month: 'Next', year: 'workshop', held: '' };
+    const o = ymd(n), st = t12(n.start), date = MONTHS[o.m - 1] + ' ' + o.d + ', ' + o.y, room = n.room || '';
+    return {
+      long: longDate(n) + ' · ' + timeRange(n) + (n.doors ? ' (doors ' + n.doors + ')' : '') + (room ? ' · ' + room : ''),
+      weekday: DAYS[o.dow], date, datetime: date + ' · ' + st.s + ' ' + st.ap, time: timeRange(n),
+      doors: (n.doors ? 'Doors open ' + n.doors : '') + (C.teamsUrl ? (n.doors ? ' · ' : '') + 'or join on Teams' : ''),
+      where: room, wherex: room + teams, day: String(o.d).padStart(2, '0'), month: MONTHS[o.m - 1], year: String(o.y),
+      held: 'Held ' + longDate(n) + (room ? ' · ' + room : '')
+    };
+  }
+  function renderSessions() {
+    const S = sessions(), C = window.PW_CONFIG || {}, v = sessionText(S.next);
+    document.querySelectorAll('[data-session]').forEach(el => { const k = el.getAttribute('data-session'); if (k in v) { el.textContent = v[k]; el.classList.toggle('tbd', !S.next); } });
+    document.querySelectorAll('[data-when]').forEach(el => { const w = el.getAttribute('data-when'); el.hidden = w === 'upcoming' ? !S.next : !!S.next; });
+    document.querySelectorAll('[data-past-list]').forEach(ul => { ul.innerHTML = S.past.slice().reverse().map(s => '<li>' + sessionText(s).held + '</li>').join(''); });
+    document.querySelectorAll('[data-past]').forEach(el => { el.hidden = !S.past.length; });
+    document.querySelectorAll('[data-year]').forEach(el => { el.textContent = S.now.slice(0, 4); });
+    if (!S.next) document.querySelectorAll('[data-checkin]').forEach(el => {
+      if (el.querySelector('.checkin-wait')) return;
+      [...el.children].forEach(c => { c.hidden = true; });
+      const m = document.createElement(el.getAttribute('data-checkin') === 'btn' ? 'span' : 'p'); m.className = 'checkin-wait'; m.textContent = 'Check-in opens at the next session'; el.appendChild(m);
+    });
+    /* Legacy single-event fields, derived so older pages and the handout export keep working */
+    C.eventDate = S.next ? longDate(S.next) : 'Next workshop: TBD';
+    C.eventTime = S.next ? timeRange(S.next) + (S.next.doors ? ' (doors ' + S.next.doors + ')' : '') : '';
+    C.eventRoom = S.next ? (S.next.room || '') : '';
+    return S;
+  }
+  function init() { renderSessions(); bindInputs(); document.querySelectorAll('[data-tally]').forEach(tally); themeButton(); }
   document.addEventListener('DOMContentLoaded', init);
-  return { get, set, toast, copy, download, bindInputs, toggleTheme, setTheme, currentTheme };
+  return { get, set, toast, copy, download, bindInputs, toggleTheme, setTheme, currentTheme, sessions, renderSessions, sessionText };
 })();

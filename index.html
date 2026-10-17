@@ -21,10 +21,10 @@
   <h1 class="reveal">Portfolio Development</h1>
   <p class="lead reveal">Build the portfolio you'll be proud to send. A résumé gets you a conversation. A portfolio proves you can do what it claims. Everything you make today leaves with you.</p>
   <div class="event reveal">
-    <div class="event-date"><span class="d">08</span><span class="m">October<br>2026</span></div>
+    <div class="event-date"><span class="d" data-session="day"></span><span class="m"><span data-session="month"></span><br><span data-session="year"></span></span></div>
     <div class="event-rows">
-      <div><span class="k">Thursday</span><b>12:45 – 1:45 p.m.</b><small>Doors open 12:30</small></div>
-      <div><span class="k">Where</span><b>Hermann Hall 010</b><small>Illinois Tech, Mies Campus</small></div>
+      <div><span class="k" data-session="weekday"></span><b data-session="time"></b><small data-session="doors"></small></div>
+      <div data-when="upcoming"><span class="k">Where</span><b data-session="where"></b><small>Illinois Tech, Mies Campus</small></div>
       <div><span class="k">Series</span><b>Elevate Workshops</b><small>Session 1 of 4</small></div>
     </div>
   </div>
@@ -57,16 +57,21 @@
   </div>
   <div class="card">
     <h2>Check in and get Elevate credit</h2>
-    <div class="qr"><img src="assets/checkin-qr.png" alt="312 check-in QR code"><div><p>Scan with the Illinois Tech 312 app, or open <a href="https://cglink.me/224/c38490410115754">cglink.me/224/c38490410115754</a>.</p><p class="hint">Check-in records your attendance for Elevate workshop credit.</p></div></div>
+    <div data-checkin="card"><div class="qr"><img src="assets/checkin-qr.png" alt="312 check-in QR code"><div><p>Scan with the Illinois Tech 312 app, or open <a id="checkinA" href="#"><span id="checkinShort"></span></a>.</p><p class="hint">Check-in records your attendance for Elevate workshop credit.</p></div></div></div>
   </div>
+</div></section>
+
+<section class="section alt" data-past hidden><div class="wrap">
+  <h2>Past sessions</h2>
+  <ul class="past-list" data-past-list></ul>
 </div></section>
 
 <footer class="footer"><div class="wrap">
   <div>Career Services and Experiential Learning · Illinois Institute of Technology · MTCC Room 106 · 312.567.6800 · <a href="https://elevate.iit.edu">elevate.iit.edu</a></div>
-  <div>© 2026 Freddrick Logan, PhD · <a href="https://fredlogan.phd">fredlogan.phd</a></div>
+  <div>© <span data-year></span> Freddrick Logan, PhD · <a href="https://fredlogan.phd">fredlogan.phd</a></div>
 </div></footer>
 <script src="assets/config.js"></script>
 <script src="assets/site.js"></script>
-<script>document.addEventListener('DOMContentLoaded',()=>{document.getElementById('bookCard').href=window.PW_CONFIG.bookingUrl;});</script>
+<script>document.addEventListener('DOMContentLoaded',()=>{const C=window.PW_CONFIG||{};const b=document.getElementById('bookCard');if(b)b.href=C.bookingUrl||'#';const a=document.getElementById('checkinA');if(a)a.href=C.checkinUrl||'#';const s=document.getElementById('checkinShort');if(s)s.textContent=(C.checkinUrl||'').replace('https://','');});</script>
 </body>
 </html>
