@@ -146,3 +146,15 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
 .past-list li{padding:10px 0;border-bottom:1px solid var(--line);color:var(--body)}
 .checkin-wait{font-weight:600;margin:0}
 .check input{flex:0 0 22px}
+
+/* Branded QR cards: white card, thin scarlet border, scarlet label; the code itself stays scannable in both themes */
+.qrcard{display:inline-flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:2px solid #C8102E;border-radius:16px;padding:14px 16px 12px;color:#111;text-align:center;box-shadow:var(--shadow);max-width:100%;vertical-align:top}
+.qrcard img,.qr .qrcard img{display:block;width:var(--qr,220px);max-width:100%;height:auto;border:0;box-shadow:none;background:#fff;padding:0;border-radius:0}
+.qrcard .lbl{font-weight:700;color:#C8102E;font-size:clamp(15px,1.3vw,19px);line-height:1.2;letter-spacing:.2px}
+.qrcard .sub{font-size:12px;line-height:1.3;color:#555;max-width:30ch;word-break:break-word}
+.qrcard .sub a{color:#555}
+.qr{align-items:flex-start;flex-wrap:wrap}
+.qr .qrcard{flex:0 0 auto}
+.slide .qrcard .lbl{font-size:clamp(16px,min(1.5vw,2.6vh),22px)}
+.slide .qrcard .sub{font-size:clamp(11px,1.6vh,13px)}
+@media (max-height:760px){.slide .qrcard{padding:10px 12px 8px;gap:4px}}
