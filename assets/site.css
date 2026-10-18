@@ -193,3 +193,11 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
 .foot-checkin .qrcard .lbl{font-size:14px}
 .foot-checkin p{margin:0;font-weight:600;color:var(--ink);font-size:17px}
 .foot-checkin .checkin-wait{margin:0}
+
+/* Careers & Elevate Hub resource lists */
+.hublist{list-style:none;margin:6px 0 0;padding:0}
+.hublist li{padding:7px 0;border-bottom:1px solid var(--line);line-height:1.4}
+.hublist li:last-child{border-bottom:0}
+.hublist a{font-weight:600}
+.hublist .why{display:block;font-size:13px;color:var(--muted)}
+.hint.hub a{white-space:nowrap}
