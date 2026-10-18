@@ -16,9 +16,12 @@
   <nav><a class="active" href="index.html">Home</a><a href="slides.html">Slides</a><a href="handout.html">Handout</a><a href="poll.html">Poll</a><a href="qa.html">Q&amp;A</a><a href="resources.html">Resources</a></nav>
 </div></header>
 
-<section class="hero"><div class="wrap">
+<section class="hero"><div class="hero-bg" aria-hidden="true"></div><div class="wrap">
   <div class="eyebrow reveal">Elevate Workshop · 1 of 4</div>
   <h1 class="reveal">Portfolio Development</h1>
+  <aside class="hero-checkin reveal" data-checkin="hero">
+    <div class="qrcard"><img src="assets/checkin-qr.png" alt="312 check-in QR code"><span class="lbl">Check in on 312</span><span class="sub">Scan with the Illinois Tech 312 app, or open <a id="checkinA" href="#"><span id="checkinShort"></span></a></span><span class="sub">Check-in records your Elevate workshop credit</span></div>
+  </aside>
   <p class="lead reveal">Build the portfolio you'll be proud to send. A résumé gets you a conversation. A portfolio proves you can do what it claims. Everything you make today leaves with you.</p>
   <div class="event reveal">
     <div class="event-date"><span class="d" data-session="day"></span><span class="m"><span data-session="month"></span><br><span data-session="year"></span></span></div>
@@ -51,8 +54,8 @@
   <div class="card accent"><div class="num">06</div><h3>Book a 1:1</h3><p>Thirty minutes with Freddrick Logan to review what you built today and plan the next page.</p><a id="bookCard" href="#">Book a portfolio review →</a></div>
 </div></section>
 
-<section class="section"><div class="wrap grid c2">
-  <div class="card">
+<section class="section"><div class="wrap">
+  <div class="card goals">
     <h2>What you'll walk out able to do</h2>
     <ol>
       <li>Name the five parts of a professional portfolio: Home, About, Case Studies, Skills, Contact.</li>
@@ -62,10 +65,6 @@
       <li>Apply show-don't-tell visual storytelling.</li>
     </ol>
   </div>
-  <div class="card">
-    <h2>Check in and get Elevate credit</h2>
-    <div data-checkin="card"><div class="qr"><div class="qrcard" style="--qr:190px"><img src="assets/checkin-qr.png" alt="312 check-in QR code"><span class="lbl">Check in on 312</span></div><div><p>Scan with the Illinois Tech 312 app, or open <a id="checkinA" href="#"><span id="checkinShort"></span></a>.</p><p class="hint">Check-in records your attendance for Elevate workshop credit.</p></div></div></div>
-  </div>
 </div></section>
 
 <section class="section alt" data-past hidden><div class="wrap">
@@ -73,9 +72,11 @@
   <ul class="past-list" data-past-list></ul>
 </div></section>
 
+<section class="checkin-foot"><div class="wrap"><div class="foot-checkin" data-checkin="foot"><div class="qrcard" style="--qr:140px"><img src="assets/checkin-qr.png" alt="312 check-in QR code"><span class="lbl">Check in on 312</span></div><p>Scan to check in for Elevate credit.</p></div></div></section>
+
 <footer class="footer"><div class="wrap">
   <div>Career Services and Experiential Learning · Illinois Institute of Technology · MTCC Room 106 · 312.567.6800 · <a href="https://elevate.iit.edu">elevate.iit.edu</a></div>
-  <div>© <span data-year></span> Freddrick Logan, PhD · <a href="https://fredlogan.phd">fredlogan.phd</a></div>
+  <div>© <span data-year></span> Freddrick Logan, PhD · <a href="https://fredlogan.phd">fredlogan.phd</a> · <span class="photo">Photo: Eastman Childs / Unsplash</span></div>
 </div></footer>
 <script src="assets/config.js"></script>
 <script src="assets/site.js"></script>

@@ -168,3 +168,28 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92em;bac
 :root[data-theme="dark"] .epigraph figcaption{color:#A5A6AA}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .epigraph figcaption{color:#A5A6AA}}
 @media (max-width:480px){.epigraph figure{padding-left:14px}.epigraph blockquote{font-size:17px}.epigraph figcaption{font-size:14px}}
+
+/* Hero: faint Chicago photo under a theme-colour overlay; check-in card in the hero; goals full width; small check-in above the footer */
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-bg::before{content:"";position:absolute;inset:0;background:url(hero-chicago.webp) center/cover no-repeat;filter:grayscale(.9) contrast(.4) brightness(1.25)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:var(--bg);opacity:.88}
+.hero{--muted:#5A5B5F}
+:root[data-theme="dark"] .hero-bg::before{filter:grayscale(.9) brightness(.8)}
+:root[data-theme="dark"] .hero{--muted:#A3A4A8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .hero-bg::before{filter:grayscale(.9) brightness(.8)}:root:not([data-theme="light"]) .hero{--muted:#A3A4A8}}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 260px;column-gap:48px;align-items:start}
+.hero .wrap>*{grid-column:1;min-width:0}
+.hero .hero-checkin{grid-column:2;grid-row:1/span 6;align-self:center;justify-self:end;width:260px;margin:0}
+.hero-checkin .qrcard{width:100%;--qr:220px;padding:14px 14px 12px}
+.hero-checkin .qrcard .sub{max-width:none}
+.hero-checkin .checkin-wait{background:#fff;border:2px solid #C8102E;border-radius:16px;padding:14px;color:#111;text-align:center}
+@media (max-width:1023px){.hero .wrap{display:block}.hero .hero-checkin{display:block;width:100%;max-width:320px;margin:16px 0 4px}.hero-checkin .qrcard{--qr:min(280px,100%);width:100%}}
+.goals ol{columns:2;column-gap:36px;margin:8px 0 0;padding-left:22px}
+.goals li{break-inside:avoid;margin:0 0 8px}
+@media (max-width:760px){.goals ol{columns:1}}
+.checkin-foot{padding:6px 0 26px}
+.foot-checkin{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.foot-checkin .qrcard{padding:10px 12px 8px;gap:4px}
+.foot-checkin .qrcard .lbl{font-size:14px}
+.foot-checkin p{margin:0;font-weight:600;color:var(--ink);font-size:17px}
+.foot-checkin .checkin-wait{margin:0}

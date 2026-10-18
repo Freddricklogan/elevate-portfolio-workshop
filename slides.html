@@ -195,6 +195,18 @@
 .vs .stat small{margin-left:auto;margin-right:auto;max-width:30ch}
 @media (max-height:920px){.vs{gap:18px}.vs .art{width:min(100%,300px);max-height:185px}.vs .stat{font-size:clamp(32px,min(4.5vw,8vh),64px)!important}.slide:has(.cols + .ask) .cols{margin-top:10px}.slide:has(.cols + .ask) .cols .box .stat{font-size:clamp(40px,min(5.2vw,8.5vh),80px)!important}.slide:has(.cols + .ask) .cols .box .stat small{margin-top:10px}}
 @media (max-height:760px){.vs .art{width:min(100%,190px);max-height:110px}.tight-hide{display:none}.slide .formula{font-size:clamp(13px,2.1vh,16px);padding:8px 12px;line-height:1.5}.seq .step{padding:6px 0}.slide .cols .box .stat small{line-height:1.25}}
+
+/* Compact three-up cards: step number, scarlet top rule, large word, one-line description */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:14px}
+.tcard{background:var(--surface);border:1px solid var(--line);border-top:4px solid #CC0000;border-radius:14px;padding:14px 18px 14px;box-shadow:var(--glow)}
+.ink .tcard{background:#1B1B20;border-color:#2B2B31;border-top-color:#CC0000;color:#D6D3CB}
+.tcard .stepno{display:block;font-size:12px;letter-spacing:2.5px;color:var(--muted);font-weight:700}
+.tcard b{display:block;font-family:var(--serif);font-weight:600;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(26px,min(3vw,5.4vh),46px);line-height:1;color:var(--ink);margin:6px 0 8px}
+.ink .tcard b{color:#F4F2EC}
+.tcard p{margin:0;font-size:clamp(14px,min(1.25vw,2.2vh),18px);line-height:1.35;color:var(--body)}
+.ink .tcard p{color:#D6D3CB}
+@media (max-width:760px){.trio{grid-template-columns:1fr;gap:12px}.tcard b{font-size:28px}}
+@media (max-height:760px){.tcard{padding:10px 14px}.tcard b{margin:4px 0 6px}}
 </style>
 </head>
 <body>
@@ -395,10 +407,10 @@
   <span class="credit">Photo: <a href="https://unsplash.com/@peterlaster?utm_source=elevate_workshops&amp;utm_medium=referral">Pedro Lastra</a> / <a href="https://unsplash.com/?utm_source=elevate_workshops&amp;utm_medium=referral">Unsplash</a></span>
   <div class="eyebrow reveal">You have more than you think</div>
   <h2 class="reveal">Your evidence already exists. It just isn't published.</h2>
-  <div class="cols">
-    <div class="box reveal"><p class="stat" style="font-size:clamp(44px,5.2vw,80px)">Class<small>Pull from studio work, labs, senior design, case competitions, IPRO</small></p></div>
-    <div class="box reveal"><p class="stat" style="font-size:clamp(44px,5.2vw,80px)">Elevate<small>Write up your Forage simulations, hackathons, and AWS certification projects</small></p></div>
-    <div class="box reveal"><p class="stat" style="font-size:clamp(44px,5.2vw,80px)">Life<small>Count part-time jobs, freelance work, side projects, club leadership</small></p></div>
+  <div class="trio">
+    <div class="tcard reveal"><span class="stepno">01</span><b>Class</b><p>Pull from studio work, labs, senior design, case competitions, IPRO.</p></div>
+    <div class="tcard reveal"><span class="stepno">02</span><b>Elevate</b><p>Write up your Forage simulations, hackathons, and AWS certification projects.</p></div>
+    <div class="tcard reveal"><span class="stepno">03</span><b>Life</b><p>Count part-time jobs, freelance work, side projects, club leadership.</p></div>
   </div>
   <div class="ask reveal" style="margin-top:18px">Ask the room</div>
   <p class="lead reveal">Name one thing you made this semester that nobody outside the class has seen.</p>
